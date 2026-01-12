@@ -1,0 +1,1 @@
+In mathematics, a linear form (also known as a **linear functional**, a one-form, or a covector) is a linear map from a vector space to its field of scalars (often, the real numbers or the complex numbers).

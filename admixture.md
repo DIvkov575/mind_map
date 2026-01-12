@@ -1,0 +1,1 @@
+**Admixture** is the mixing of **genetically differentiated populations** through recent shared ancestry.

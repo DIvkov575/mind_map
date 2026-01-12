@@ -1,0 +1,6 @@
+- a type of [[Automorphism]] of [[Schwartz Space]] F:S(Rn)⟷S(Rn) (not true for other function spaces)
+	- Two fundamental identitiesL set of functions stable under:
+		- arbitrary differentiation
+		- arbitrary multiplication by polynomials
+	- Those operations are dual under Fourier transform. No other common space has this symmetry.
+- 

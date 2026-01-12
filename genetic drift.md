@@ -1,0 +1,1 @@
+Random sampling creates correlations, especially in small populations.

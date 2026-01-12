@@ -1,0 +1,5 @@
+- Clipping gradients `torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)` will prevent explosins
+	- Too high LR will cause constant clipping - effectively low LR
+	- Disproportionate updates?? - confim
+- Increase batch size
+- Decrease LR

@@ -1,0 +1,1 @@
+**Loci** (singular: **locus**) are **specific, fixed positions on the genome**.

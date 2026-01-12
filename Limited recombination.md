@@ -1,0 +1,3 @@
+**Limited recombination** means that **crossovers during meiosis do not occur often enough to fully randomize alleles between nearby loci**, so alleles close together on a chromosome tend to be inherited together.
+
+Proximity effect ...
