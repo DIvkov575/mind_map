@@ -2,7 +2,7 @@ Type of [[Flow-Based Model]]
 
 https://proceedings.mlr.press/v202/song23a/song23a.pdf
 
-- [[Diffusion *Models*]] depend on an slow iterative sampling $\to$ **consistency models**  family of models that quality samples by directly mapping noise to data. 
+- [[Diffusion Models]] depend on an slow iterative sampling $\to$ **consistency models**  family of models that quality samples by directly mapping noise to data. 
 - still allow [[Multistep Sampling]] to trade compute for sample quality. 
 - They also support zero-shot data editing, such as image inpainting, colorization, and super-resolution, without requiring explicit training on these tasks. 
 - Consistency models can be trained either by [[Distillation | distilling]] pre-trained diffusion models, or as standalone generative models altogether. 

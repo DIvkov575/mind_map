@@ -1,4 +1,0 @@
-
-
-
-Fokker Planck Loss
