@@ -23,3 +23,17 @@ $\frac{dz(t)}{dt} = f_\theta(z(t), t)dt$
 [[Latent Neural ODE]]
 [[Stochastic Neural ODE]]
 [[Augmented Neural ODE]]
+
+
+### Variants
+- Second Order Neural ODE
+	- Capture Oscillations better
+	- $\frac{d^2 x(t)}{dt^2} = f_\theta\!\big(x(t), \dot{x}(t), t\big)dt$
+	- or equivalently first-order system by augmenting the state:
+		$\begin{aligned} \dot{x}(t) &= v(t) \\ \dot{v}(t) &= f_\theta(x(t), v(t), t) \end{aligned}$
+- Augmented Neural ODE
+	- Add a few "superficial" covariates to input -> more expressive
+	- More dimensional state without embedding
+- Latent Neural ODE
+	- [[Encoder]] embeds inputs into [[latent space (LDM)]], then learns varations
+
