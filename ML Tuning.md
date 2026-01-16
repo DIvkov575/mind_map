@@ -1,7 +1,7 @@
 
 Noisy Gradients $\mapsto$ Increase [[Batch]] Size
 [[Exploding Gradient]] $\mapsto$ Reduce [[learning rate (LR)]], Reduce [[Batch]] Size
-[[Overfitting]] (good training val, bad testing val) $\mapto$ 
+[[Overfitting]] (good training val, bad testing val) $\mapsto$ 
 - **Reduce model capacity**: smaller model, fewer parameters.
 - **Regularization**: weight decay ([[Ridge regularization (L2) | L2]]), dropout.
 - **More data / augmentation**: increase dataset diversity.
@@ -13,7 +13,8 @@ Noisy Gradients $\mapsto$ Increase [[Batch]] Size
 - **Increase learning rate carefully**: if too small, optimization is slow.
 - **Better features / preprocessing**: more informative inputs.
 - **Reduce regularization**: excessive weight decay or dropout can underfit.
-
+[[Data Leakage]] (validation loss << training loss0 $\mapsto$
+- evaluate [[Train Test Split]]
 
 [[Batch]] Size
 - Larger sizes improve gradient stability (but decrease stochasticity)

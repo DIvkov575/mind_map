@@ -1,0 +1,7 @@
+$\sqcup$
+
+- computer science meaning of the term, see Tagged unoin
+- disjoint union (or discriminated union) A⊔B of the sets A and B is the set formed from the elements of A and B labelled (indexed) with the name of the set from which they come. So, an element belonging to both A and B appears twice in the disjoint union, with two different labels.
+- In [[category theory]] the disjoint union is the [[coproduct]] of the category of sets, and thus defined [[up to]] a [[bijection]]. In this context, the notation ![{\textstyle \coprod _{i\in I}A_{i}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/f3c36ae82790e5281fc1d45d79b5939a9f87cade) is often used.
+
+A standard way for building the disjoint union is to define A![{\displaystyle A}](https://wikimedia.org/api/rest_v1/media/math/render/svg/7daff47fa58cdfd29dc333def748ff5fa4c923e3) as the set of ordered pairs ![{\displaystyle (x,i)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/b2b2a66e50f18a9801c88d70019fa461a041a65f) such that x\in A_i and the injection Ai→A![{\displaystyle A_{i}\to A}](https://wikimedia.org/api/rest_v1/media/math/render/svg/b745f510b9e81849109eafa868a06de2eaea14e6) as x↦(x,i).![{\displaystyle x\mapsto (x,i).}](https://wikimedia.org/api/rest_v1/media/math/render/svg/3decf95c23655d5451cb25427c9b9024fe484469)
