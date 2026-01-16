@@ -1,0 +1,1 @@
+Epistatic interactions are when one gene modifies or masks the effect of another gene, creating complex, non-[[Mendelian]] outcomes

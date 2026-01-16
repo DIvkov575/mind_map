@@ -1,0 +1,1 @@
+- A **category** consists of objects and **[[Morphisms]]** between objects.
