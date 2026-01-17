@@ -1,0 +1,3 @@
+- A GPU runs **thousands of threads at once**.
+- Threads are grouped into **[[warps]]** (usually 32 threads).
+- warp scheduled on an [[Streaming Multiprocessing Unit (SM) | SM]]

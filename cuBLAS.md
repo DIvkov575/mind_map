@@ -1,0 +1,2 @@
+- `torch.matmul` [[PyTorch]] under the hood uses **cuBLAS [[GEMM]] kernels**.
+	- Assumes aggressive cuBLAS kernel (assumes many [[Streaming Multiprocessing Unit (SM)]] -> confronts insufficient SM units -> results to more passive kernel
