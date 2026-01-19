@@ -1,0 +1,1 @@
+weight initialization scheme designed to keep the scale of activations and gradients roughly constant across layers in deep neural networks.

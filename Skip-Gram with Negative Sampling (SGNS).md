@@ -1,0 +1,1 @@
+It is the training objective used in [[Word2Vec]] that is primarily responsible for good vector arithmetic.

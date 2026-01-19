@@ -9,7 +9,7 @@ It is also classified as a [[Markov Random Field]]
 
 Structure
 ---
-A Boltzmann machine, like a [[Sherrington–Kirkpatrick]] model, is a network of units with a total "energy" ([Hamiltonian](https://en.wikipedia.org/wiki/Hamiltonian_function "Hamiltonian function")) defined for the overall network. Its units produce [binary](https://en.wikipedia.org/wiki/Binary_number "Binary number") results. Boltzmann machine weights are [stochastic](https://en.wikipedia.org/wiki/Stochastic "Stochastic"). The global energy E![{\displaystyle E}](https://wikimedia.org/api/rest_v1/media/math/render/svg/4232c9de2ee3eec0a9c0a19b15ab92daa6223f9b) in a Boltzmann machine is identical in form to that of [Hopfield networks](https://en.wikipedia.org/wiki/Hopfield_network "Hopfield network") and [Ising models](https://en.wikipedia.org/wiki/Ising_model "Ising model"):
+A Boltzmann machine, like a [[Sherrington–Kirkpatrick]] model, is a network of units with a total "energy" ([Hamiltonian](https://en.wikipedia.org/wiki/Hamiltonian_function "Hamiltonian function")) defined for the overall network. Its units produce [binary](https://en.wikipedia.org/wiki/Binary_number "Binary number") results. Boltzmann machine weights are [stochastic](https://en.wikipedia.org/wiki/Stochastic "Stochastic"). The global energy E![{\displaystyle E}](https://wikimedia.org/api/rest_v1/media/math/render/svg/4232c9de2ee3eec0a9c0a19b15ab92daa6223f9b) in a Boltzmann machine is identical in form to that of Hopfield networks and [Ising models](https://en.wikipedia.org/wiki/Ising_model "Ising model"):
 
 ![{\displaystyle E=-\left(\sum _{i<j}w_{ij}\,s_{i}\,s_{j}+\sum _{i}\theta _{i}\,s_{i}\right)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/419a4966dae86dfb786dbeb6aadd3c38d9ec30d3)
 
