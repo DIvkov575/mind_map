@@ -1,0 +1,2 @@
+- A set is convex iff it contains all [[Convex Combination]] of its elements
+- set closed under [[linear interpolation]]

@@ -1,0 +1,1 @@
+A form of [[Convex Combination]] but interpolating between only two points
