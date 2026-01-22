@@ -1,0 +1,1 @@
+Refers to the number of distinct locations (pixels, cells, or units) in a 2D or 3D grid where values are defined. It essentially measures how “detailed” the representation is in space.

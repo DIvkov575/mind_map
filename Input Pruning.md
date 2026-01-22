@@ -1,4 +1,5 @@
 
+[[Vision-Model Input Optimization]]
 
 [[Information Theory | Information-Theoretic]] Methods (Unsupervised)
 - [[Perplexity Model (input pruning) | Perplexity]]-Based Pruning: Calculates the probability of each token. Tokens that the model can easily predict (low perplexity) are removed as redundant.

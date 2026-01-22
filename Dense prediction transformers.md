@@ -1,0 +1,1 @@
+transformer-based models designed to produce per-element outputs rather than a single global prediction. Instead of one label per input (classification), the model outputs a prediction at every spatial or temporal location

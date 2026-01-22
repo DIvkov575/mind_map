@@ -1,0 +1,1 @@
+deterministic interpolation method used to increase [[Spatial Resolution]] by estimating new values as [[linear combination]] of nearby pixels

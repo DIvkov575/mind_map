@@ -2,3 +2,6 @@
 - with respect to complete orthonormal basis functions
 - with overcomplete set or [[frame (vector space)]] for the [[Hilbert Space]] of square integrable functions.
 	- Accomplished with [[coherent states]]
+
+
+[[Wavelet Neural Network]]

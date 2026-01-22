@@ -1,0 +1,13 @@
+
+- Many models perform (non-overlapping) [[Patch]] level attention, these models require [[Up- sampling]]
+	- Unsolved problem: lightweight edge-aligned attention map upsampling using original image as guidance -- specificall optimized for [[Seam Carving]] quality rather than generic feature reconstruction
+	- eg. [[FeatUp's Joint Bilateral Upsampler]] which achieves +5% [[mIoU]] improvement over [[Bilinear upsampling]] for semantic segmentation
+	- Key innovation: seam carving as training ojbective which penalizes atention values crossing detected edges (attention map respects object boundaries)
+	- Experimets: 
+		- Compare with bilinear, bicubic, nearest-neighbor, guided filtering baselines
+- Can we use architectures that natively produce pixel-level semantic importance?
+	- Demonstrate that lightweights [[Dense prediction transformers]] (eg. [[SegFormer-B0]], [[EfficientViT]]) produce superior energy maps compared to traditional grad energy and upsampled ViT attention 
+- Current Seam Carving benchmarks don't measure whether resized images maintain ViT perforamnce. -> new eval framwork and enrgy funciton specifically designed to preserve ViT accuracy after resizing 
+	- Attention consistency metrics
+	- Feature similarity Metrics
+- How can attention from several ViT layers be combined into map
