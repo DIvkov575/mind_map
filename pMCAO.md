@@ -1,0 +1,1 @@
+permanent middle cerebral artery [[Occlusion]]

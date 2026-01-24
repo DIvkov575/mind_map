@@ -1,4 +1,4 @@
-- a type of [[Automorphism]] of [[Schwartz Space]] F:S(Rn)⟷S(Rn) (not true for other function spaces)
+- a type of [[Automorphism]] of [[Schwartz Space]] $F:S(R_n)⟷S(R_n)$ (not true for other function spaces)
 	- Two fundamental identitiesL set of functions stable under:
 		- arbitrary differentiation
 		- arbitrary multiplication by polynomials

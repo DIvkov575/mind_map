@@ -23,7 +23,7 @@ Often the weights ![{\displaystyle w_{ij}}](https://wikimedia.org/api/rest_v1/m
 
 **Increment**
 ---
-The difference in the global energy that results from a single unit i![{\displaystyle i}](https://wikimedia.org/api/rest_v1/media/math/render/svg/add78d8608ad86e54951b8c8bd6c8d8416533d20) equaling 0 (off) versus 1 (on), written ΔEi![{\displaystyle \Delta E_{i}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/aa40fa108e21d148e5a39c6202cf9a2ee69cb1cb), assuming a symmetric matrix of weights, is given by:
+The difference in the global energy that results from a single unit i![{\displaystyle i}](https://wikimedia.org/api/rest_v1/media/math/render/svg/add78d8608ad86e54951b8c8bd6c8d8416533d20) equaling 0 (off) versus 1 (on), written$\Delta E_{i}$, assuming a symmetric matrix of weights, is given by:
 
 ![{\displaystyle \Delta E_{i}=\sum _{j>i}w_{ij}\,s_{j}+\sum _{j<i}w_{ji}\,s_{j}+\theta _{i}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/4cad4ed8631921945d7056276eaeb5e0246e7ce2)
 
