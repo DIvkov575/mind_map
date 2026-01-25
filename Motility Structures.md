@@ -1,0 +1,2 @@
+- enalbing organisms to move
+- eg. [[Flagella]] in bacteria

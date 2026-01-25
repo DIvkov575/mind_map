@@ -1,0 +1,3 @@
+Classical belief that loss/bias monotonically decreases and variance increases as # parametres increases !! confirm this
+
+- [[Double Descent]] is more complete?...

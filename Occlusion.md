@@ -1,2 +1,2 @@
-Occlusion: the blocking or obscuring of something by another object.
+the blocking or obscuring of something by another object.
 eg. blood vessel blockage

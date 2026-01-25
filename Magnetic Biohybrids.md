@@ -1,0 +1,1 @@
+motile (capable of motion) bacteria coupled to a synthetic magnetic component
