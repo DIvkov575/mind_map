@@ -7,7 +7,7 @@ Mechanism:
 
 
 ---
-Bacterial chemotaxis (E. Coli - or run/tumble organisms) Can be modeled with an active [[Brownian Motion]] model w/ multiple internal states "run" and "change of direction". 
+Bacterial chemotaxis ([[E. Coli]] - or run/tumble organisms) Can be modeled with an active [[Brownian Motion]] model w/ multiple internal states "run" and "change of direction". 
 position $r$ and velocity/direction $e$
 ![[Screenshot 2026-01-25 at 4.15.23 PM.png]]
 Observe similarity to [[Langevin Dynamics]]
