@@ -1,0 +1,7 @@
+- Partitions n observations into k clusters with each point belonging to the mean (per centroid).
+- Partitions [[data space (DDPM)| data space]] into [[Voronoi Cells]]
+- Minimizes within-cluster variance (squared Euclidean Distance) (not regular euclidean distance = [[Weber problem]])
+	- Mean optimizes squared errors
+	- Geometric Median minimizes Euclidean distances -> [[k-medians]] and [[k-mediodes]]
+- The problem is computationally difficult NP-hard however, efficient heuristic algorithms converge quickly to a local optimum
+	- Similar to [[Expectation–Maximization (EM)]] algorithms for [[Mixture Models]] of gaussian distributiosn via an iterative refinement approach employed by both k-means and Gaussian mixture modelin

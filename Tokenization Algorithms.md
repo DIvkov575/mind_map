@@ -1,0 +1,3 @@
+- Word-level: large vocab, OOV issues
+- Character-level: no OOV, but very long sequences
+- [[Byte-Pair Encoding (BPE)]]: middle ground (shorter sequences + no OOV)
