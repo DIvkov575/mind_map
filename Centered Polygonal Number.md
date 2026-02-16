@@ -1,0 +1,1 @@
+A class of [[Figurated Numbers]]  each formed by a central dot, surrounded by polygonal layers of dots with a constant number of sides. Each side of a polygonal layer contains one more dot than each side in the previous layer; so starting from the second polygonal layer, each layer of a centered _k_-gonal number contains _k_ more dots than the previous layer.
