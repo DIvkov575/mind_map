@@ -19,6 +19,9 @@ The neural network is trained to match the true velocity
 via regression:
 	$\mathcal{L} = \mathbb{E}\big[\|v_\theta(x_t,t) - v^*(x_t,t)\|^2\big]$
 
+or in simpler words Flow matching defines a **time-dependent vector field** $v(t,x)$ such that if you follow the flow: $\frac{dx}{dt} = v(t, x)$ from t=0->1 you smoothly map samples from 0 -> 1
+
+
 Examples:
 [[Rectified Flow]] (Lipman et al., 2022)
 [[Conditional Flow Matching (CFM)]]
