@@ -1,0 +1,5 @@
+Method for studying [[Cohomology Groups]] of a [[Smooth Manifold]] M using Partially Differentiable Equations
+
+The key observation is that, given a Riemannian metric on M, every cohomology class has a canonical representative, a differential form that vanishes under the Laplacian operator of the metric. Such forms are called harmonic.
+
+The theory was developed by Hodge in the 1930s to study algebraic geometry, and it built on the work of Georges de Rham on de Rham cohomology. It has major applications in two settings—[[Riemannian manifolds]] and Kähler manifolds. Hodge's primary motivation, the study of complex projective varieties, is encompassed by the latter case. Hodge theory has become an important tool in algebraic geometry, particularly through its connection to the study of algebraic cycles.
