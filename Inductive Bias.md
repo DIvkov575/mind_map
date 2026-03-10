@@ -1,0 +1,1 @@
+the set of assumptions a machine learning model uses to predict outputs for unseen data based on training data
