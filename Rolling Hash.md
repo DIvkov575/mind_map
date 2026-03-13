@@ -1,0 +1,1 @@
+~update the [[Hash]] in O(1) when sliding the window.
