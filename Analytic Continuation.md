@@ -1,0 +1,1 @@
+Analytic continuation is a technique in [[Complex Analysis]] to extend the domain of a function beyond where it was originally defined, while keeping it consistent with its original definition.
