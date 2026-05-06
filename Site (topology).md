@@ -1,4 +1,4 @@
-generalization of a **[[topological space]]** for the purposes of sheaf theory
+generalization of a **[[Topological Space]]** for the purposes of sheaf theory
 ## Topological space**
 
 A **topological space** X is a set with a collection of open sets O(X) satisfying:
