@@ -1,0 +1,1 @@
+X is a preregular space if any two topologically distinguishable points can be separated by disjoint neighbourhoods. A preregular space is also called an R1 space.

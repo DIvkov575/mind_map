@@ -1,1 +1,1 @@
-the set of assumptions a machine learning model uses to predict outputs for unseen data based on training data
+==the set of assumptions a machine learning model uses to predict outputs for unseen data, allowing it to generalize beyond training examples==. It limits the hypothesis space, preferring simpler or structured solutions (e.g., smoothness, linearity) to prevent overfitting. Without it, learning new, unseen data is impossible. 
