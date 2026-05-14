@@ -5,6 +5,8 @@ An SM contains:
 - **Shared memory / L1 cache**: Fast memory shared between threads in the SM.
 - **[[Warp]] scheduler**: Controls which threads execute when.
 	- Figures out which instructions (threads/warps) to run where (core) and when
+	- Think like cpu thread/instruction scheduler - pipelining
+- [[LD-ST Unit]]
 More
 - SM executes in SIMD manor (NVIDIA [[SIMT]] (Single Instruction, Multiple Threads)
 - SM schedules SIMT, but [[CUDA cores]] executes SIMD, [[Tensor cores]] specialized SIMD

@@ -1,0 +1,3 @@
+Load/Store unit
+
+The units that execute memory instructions — moving data between registers and memory (shared memory, L1/L2 cache, global VRAM). When a warp does a load, the LD/ST units compute the 32 thread addresses, handle coalescing (merging consecutive addresses into wide transactions), and issue the actual memory request. The warp then typically parks until the data arrives — which is exactly the stall the warp scheduler hides by switching to another warp.
