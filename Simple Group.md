@@ -1,0 +1,1 @@
+Have no normal subgroup (equivalent to subspace or subpresentation)

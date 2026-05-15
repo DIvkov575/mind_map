@@ -1,5 +1,6 @@
 The problem it solves: naive attention builds the full $N \times N$ attention score matrix in GPU memory. Kernel is memory-bandwidth bound — most time is spent shuffling that matrix to and from slow [[High Bandwidth Memory (HBM)]] not doing math.
 
+	
 
 Never materialize the full N×N matrix
   - Tile Q, K, V into blocks.
