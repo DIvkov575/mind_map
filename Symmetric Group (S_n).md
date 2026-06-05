@@ -1,4 +1,5 @@
-Sn​ is the group of all permutations of an n-element set usually {1,2,…,n}. A permutation is a bijection from the set to itself.
+Sn​ is the group of all permutations of an n-element set usually {1,2,…,n}. 
+
 
 A transformation is a _symmetry_ of an object if applying it does not change the object in any meaningful way
 
