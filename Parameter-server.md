@@ -1,0 +1,3 @@
+In this approach, the local model replicas are synchronized by using push-and-pull semantics between a set of dedicated parameter servers. The servers either explicitly hold the most up-to-date global copy of the model parameters, or otherwise participate in the weight averaging step
+
+Introducing HPC infrastructure components, such as Elastic Fabric Adapter (EFA), and algorithmic optimizations improved the performance of parameter-server approaches. For example, the parameter-server-based Herring library by Amazon Science significantly outperformed the all reduce-based approaches and achieved state-of-the-art scaling efficiency of 85 percent for large BERT-model training across 2048 GPUs.

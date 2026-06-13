@@ -9,7 +9,9 @@ antisymmetry $[x,y] = -[y,x]$ is implied
 
 
 **Ideal**
-idea of Lie algebra $L$ is a subsace $I$ such that $$[x,y]\in I \quad\forall x\in L~y \in I$$
+Idea of Lie algebra $L$ is a subspace $I$ such that $$[x,y]\in I \quad\forall x\in L~y \in I$$Assume $I, J \in L$ and that $I,J$ are ideals
+- $I \cap J$ and $I + J$ are both ideals
+
 
 **Center $Z(L)$ definition**
 A center is a type of idea such that

@@ -1,0 +1,1 @@
+A Mixture of Experts (MoE) model is a type of transformer model that consists of multiple experts. Each expert consists of a neural network. A gate network called router determines which tokens are sent to which expert. Expert parallelism is a parallelism technique that handles splitting experts of an MoE model across GPU devices.![[Expert_Parallelism_simple.png]]

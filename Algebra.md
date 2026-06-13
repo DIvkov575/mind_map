@@ -14,3 +14,17 @@ $$1_A x = x1_A = x$$
 
 
 
+**Solvable**
+
+$L^{(k+1)} = [L^k, L^k]$
+$L^{(k+1)} \subseteq L^{k} \subseteq L^0 = L$
+
+
+Thm 
+Let L \subset gl(v) be a lie alg. ; v finite dim
+L solveable
+Then \exists v \in V. V is an eigenvector for all of $L$
+
+
+
+

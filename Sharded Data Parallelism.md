@@ -1,0 +1,1 @@
+Sharded data parallelism is a memory-saving distributed training technique that splits the state of a model (model parameters, gradients, and optimizer states) across devices. ![[Screenshot 2026-06-12 at 12.13.59 PM.png]]
