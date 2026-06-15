@@ -24,4 +24,4 @@ with
 
 Examples:
 - **[[Neural ODE]]** (Chen et al.)
-- **[[Latent ODE]]** (Rubanova et al.)
+- **[[Latent Neural ODE]]** (Rubanova et al.)

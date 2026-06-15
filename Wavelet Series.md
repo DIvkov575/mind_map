@@ -4,4 +4,4 @@
 	- Accomplished with [[coherent states]]
 
 
-[[Wavelet Neural Network]]
+[[Wavelet Network (WN)]]

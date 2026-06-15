@@ -8,6 +8,6 @@ The key property is that $\delta$ depends only on $\varepsilon$, not on the poin
 
 Eg.
 - Linear mx + b
-- [[Lipschitz Functions]]
+- [[Lipschitz Continuity|Lipschitz functions]]
 - [[Continuous]] functions on [[Compact]] intervals
 - Square root (not Lipschitz)
