@@ -3,4 +3,4 @@
 [[Cross Entropy]]
 
 
-[[Kullback-Leibler Divergence]]
+[[Kullback-Leibler (KL) Divergence]]

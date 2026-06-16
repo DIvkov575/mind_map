@@ -21,5 +21,5 @@ $\mathcal{I}(\theta) = \mathbb{E}\big[s(\theta)^2\big]= -\mathbb{E}\big[\partial
 
 
 
-Local KL expansion $\implies$ Fisher information is the [[Riemannian metric]] induced by [[Kullback-Leibler Divergence|KL]]
+Local KL expansion $\implies$ Fisher information is the [[Riemannian metric]] induced by [[Kullback-Leibler (KL) Divergence|KL]]
 $$\mathrm{KL}(p_{\theta} \,\|\, p_{\theta+\delta})= \tfrac{1}{2}\delta^\top \mathcal{I}(\theta)\,\delta + o(\|\delta\|^2)$$
