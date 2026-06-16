@@ -1,6 +1,6 @@
 morphism is a structure-preserving map between two objects of the same kind
 
-**General ([[category theory]]) definition**
+**General ([[Category Theory]]) definition**
 
 - A morphism$f : A \to B$ is an arrow from object A to object B.
 - Morphisms can be **composed**: if f:f : A \to B and g : B \to C, then g \circ f : A \to C.
