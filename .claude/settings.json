@@ -1,0 +1,9 @@
+{
+  "enabledPlugins": {
+    "AmazonBuilderCoreAIAgents-pipeline-assistant@aim": false,
+    "AmazonBuilderCoreAIAgents-core@aim": false,
+    "AtlasAICapabilities-all@aim": false,
+    "SlackDigestAICapabilities-all@aim": false,
+    "MeshClawAICapabilities-all@aim": false
+  }
+}
