@@ -21,7 +21,7 @@ Key points:
 - Objects of C generalize “open sets”
 - [[Morphisms]] generalize “inclusions of open sets”
 - A **cover** of an object $U \in \mathcal{C}$ is a collection of morphisms $\{U_i \to U\}$ satisfying axioms similar to open covers:
-    1. [[isomorphism]] cover
+    1. [[Isomorphism]] cover
     2. Pullbacks of covers are covers        
     3. Composition of covers is a cover
 

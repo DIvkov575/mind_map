@@ -2,7 +2,7 @@
 Let $\mathcal{C}$ be a category. A Grothendieck topology $J$ on $\mathcal{C}$ assigns to each object $U \in \mathcal{C}$ a collection of covering families}
 $\{ U_i \to U \}_{i \in I}$
 satisfying:
-- [[isomorphism]]: Any isomorphism $V \xrightarrow{\sim} U$ is a cover.
+- [[Isomorphism]]: Any isomorphism $V \xrightarrow{\sim} U$ is a cover.
 - Stability under pullback: If $\{ U_i \to U \}$ is a cover and $V \to U$ is any morphism, then $\{ U_i \times_U V \to V \}$ is a cover.
 - transitivity If $\{ U_i \to U \}$ is a cover and $\{ V_{ij} \to U_i \}$ are covers for each $i$, then the composed family $\{ V_{ij} \to U \}$ is a cover.
 

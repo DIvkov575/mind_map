@@ -1,0 +1,1 @@
+In general, a kernel is a positive-[[Semidefinite]] symmetric function of two inputs which represents some notion of similarity between the two inputs.  

@@ -1,1 +1,1 @@
-A [[Multilinearity]] [[]]
+A [[Multilinearity]] in two dimensions
