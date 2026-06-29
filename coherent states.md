@@ -1,3 +1,8 @@
+
+<u>Physics</u>
+ coherence expresses the potential for two waves to interfere.
+
+<u>Quantum</u>
 Coherent states are a special class of [[quantum states]] that most closely resemble classical behavior, especially for systems like the quantum [[harmonic oscillator]].
 
 A coherent state $\vert \alpha \rangle$ is an eigenstate of the annihilation operator $\hat{a}$

@@ -1,0 +1,2 @@
+**Why oscillators?** In the brain, rhythmic activity and synchronization are pervasive, and have long been hypothesized to do computational work like binding distributed features into coherent percepts, gating communication between regions, and organizing the timing of spikes
+Coupled oscillators are among the simplest mathematical models of that kind of behavior, which makes them a natural primitive to study for neuro-inspired models of computation

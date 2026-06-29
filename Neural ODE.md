@@ -1,3 +1,6 @@
+- Deadahh just learn an ODE - it aint deep
+---
+
 - Fit continuous latent dynamics to trajectories.
 - Good for [[Irregular Sampling]] and extrapolation.
 -  No external inputs during evolution (unlike [[Neural Controlled Diferential Equation (NCDE)]])
@@ -20,6 +23,7 @@ $\frac{dz(t)}{dt} = f_\theta(z(t), t)dt$
 	- continuous depth
 	- adaptive step sizes
 	- no fixed number of layers
+- [[Adjoint Method (NODE)]]
 [[Latent Neural ODE]]
 [[Stochastic Neural ODE]]
 [[Augmented Neural ODE]]

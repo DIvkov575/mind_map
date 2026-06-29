@@ -1,11 +1,19 @@
+[[Algebra]]
 F-vector space L together with bilinear map [-,-] the Lie bracket
 $$L\times L \to L, \quad (x,y)\mapsto xy$$ satisfying
 $[x,x]=0$ and [[Jacobi Identity]]
 The lie bracket is often referred to as the "commutator"
 antisymmetry $[x,y] = -[y,x]$ is implied
 
+???
+Are Ideals Unique
+???
 
-[[Algebra]]
+
+
+
+
+
 
 
 **Ideal**
