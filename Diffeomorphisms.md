@@ -1,0 +1,1 @@
+ diffeomorphism is an [[Isomorphism]] of [[Differentiable Manifolds]]. It is an invertible function that maps one differentiable manifold to another such that both the function and its inverse are [[Continuous]]ly differentiable.

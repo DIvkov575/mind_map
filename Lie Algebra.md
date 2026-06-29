@@ -5,14 +5,6 @@ $[x,x]=0$ and [[Jacobi Identity]]
 The lie bracket is often referred to as the "commutator"
 antisymmetry $[x,y] = -[y,x]$ is implied
 
-???
-Are Ideals Unique
-???
-
-
-
-
-
 
 
 
