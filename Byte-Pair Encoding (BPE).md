@@ -5,6 +5,8 @@ Byte-Pair Encoding (BPE) is a subword [[Tokenization Algorithms| tokenization al
 - Replace the most frequent pair with a new merged symbol (add rather than replace w/in vocabulary)
 - Repeat steps 2–3 until a target vocabulary size is reached.
 
+Same greedy-merge-the-most-frequent-pair spirit as [[Entropy|entropy]]-minimizing codes (e.g. Huffman coding) — both shrink an encoding by giving shorter representations to whatever's more frequent, though BPE optimizes vocabulary/sequence-length tradeoff for downstream modeling rather than directly minimizing expected code length.
+
 Byte-level BPE
 - Symbols = bytes
 - Alphabet size = 256

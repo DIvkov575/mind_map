@@ -1,5 +1,5 @@
 
-Based on [[MemGPT]] Paper
+Based on [[MemGPT]] Paper. Applies [[Information Retrieval]] techniques to an agent's long-term memory store — the same underlying problem [[Continuous Claude V3]]'s persistence layer solves for a coding agent specifically.
 
 **Write** - save embedding, relationships, timestamp
 **Read** - Semantic search, keyword match ([[Okapi BM25]]), graph traversal -> fuse
@@ -34,7 +34,7 @@ How They Combine on Read
 2. BM25 keyword search — lemmatized token overlap (catches exact names/terms vectors miss)
 3. Entity boost — if the query mentions a known entity, memories linked to that entity get a score bump via the graph
 4. Score fusion — weighted sum of all three signals → final ranking
-5. Optional reranker — a cross-encoder model re-scores the top candidates for precision
+5. Optional reranker — a [[Cross Encoder]] model re-scores the top candidates for precision
 
 How They Combine on Write
 

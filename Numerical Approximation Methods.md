@@ -1,4 +1,4 @@
-The standard toolkit for computing an expensive function (exp, log, sin, sqrt, ...) cheaply and to acceptable precision, in software or in dedicated hardware:
+The standard toolkit for computing an expensive function (exp, log, sin, sqrt, ...) cheaply and to acceptable precision, in software or in dedicated hardware — a different concern from [[Numerical Optimization]] (finding an argmin/argmax), though the two share tooling at the lowest level:
 
 - **Range reduction**: rewrite the input in terms of a small, easy-to-approximate argument plus a cheap correction — e.g. $e^x = e^{x_0} \cdot 2^k$ for $x_0$ restricted to a small interval. Makes the hard part of the approximation only ever have to work on a bounded, small domain.
 - **Lookup tables**: precompute the function's value at a grid of nearby points, so a query only needs cheap interpolation between two stored values instead of evaluating the real function.

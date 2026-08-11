@@ -1,6 +1,6 @@
 A **nonparametric statistical model** is a set of probability distributions that is **not representable by a finite-dimensional parameterization**.
 
-A parametric model has the form
+Contrast a [[Parametric Model]]:
 $$P = \{P_\theta : \theta \in \Theta \subseteq \mathbb R^k\} \quad \forall k$$
 
 A nonparametric model is one where no finite-dimensional parameter vector suffices to index all distributions in the model.

@@ -1,4 +1,4 @@
-Point symetrical exponential
+Point symetrical [[Exponential Distribution|exponential]]. A [[Parametric Model]] with parameters $(\mu, b)$.
 ### PDF
 
 A [random variable](https://en.wikipedia.org/wiki/Random_variable "Random variable") has a ![{\displaystyle \operatorname {Laplace} (\mu ,b)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/84a352ac6180e1eb627bbb602cdf799c3f32165f) distribution if its [probability density function](https://en.wikipedia.org/wiki/Probability_density_function "Probability density function") is

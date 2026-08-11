@@ -1,4 +1,4 @@
-Factorize p(x) exactly via the chain rule (p(x) = Π p(x_i | x_<i))
+Factorize p(x) exactly via the chain rule (p(x) = Π p(x_i | x_<i)) — the objective a [[Transformers|transformer]]-based language model is trained under.
 
 
 

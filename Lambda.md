@@ -1,6 +1,8 @@
 
 see [[Completely Fairr Scheduler (CFS)]]
 
+A [[Distributed Compute]] problem: routing/scheduling many independent invocations across a worker fleet, rather than splitting one large computation across devices (contrast [[ML Distributed Training]]).
+
 ---
 Invocation arrives → [[(LFIS) Lambda Frontend Invoke Service]] hashes it to a partition → routed to the [[(eLSA) Lambda Sandbox Assignment]] node which checks the IdleSandboxTracker for that function version (+ tenant ID, if set) → queue non-empty → reuse triggered, pop the front entry.
 

@@ -1,6 +1,8 @@
 
 
 
+How a [[Transformers|transformer]] injects order back into an otherwise order-free attention operation.
+
 **Group Representational Position Encoding (GRAPE)**
 https://arxiv.org/pdf/2512.07805 - im tired
 

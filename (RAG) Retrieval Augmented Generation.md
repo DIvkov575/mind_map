@@ -1,4 +1,4 @@
-See [[Context Engineering]]
+An application of [[Information Retrieval]] to LLM generation. See [[Context Engineering]]
 
 
 **Naive**

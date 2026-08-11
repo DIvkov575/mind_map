@@ -1,4 +1,4 @@
- is a ranking function used by search engines to estimate the relevance of documents to a given search query.
+is a ranking function used by search engines to estimate the relevance of documents to a given search query — a core [[Information Retrieval]] technique.
 
 BM25 is a bag-of-words retrieval function that ranks a set of documents based on the query terms appearing in each document, regardless of their proximity within the document. 
 

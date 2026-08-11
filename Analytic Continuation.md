@@ -1,1 +1,3 @@
 Analytic continuation is a technique in [[Complex Analysis]] to extend the domain of a function beyond where it was originally defined, while keeping it consistent with its original definition.
+
+The canonical case: a function defined by a [[Power Series]] only converges inside its [[Radius of Convergence]] — analytic continuation is how you extend that function's definition past that boundary (using a different representation valid further out) while staying consistent with the original series wherever both are defined.
