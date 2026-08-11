@@ -8,3 +8,5 @@ Core points:
 
 [[Reperfusion injury]] (key concept):
 - Restoration of blood flow can paradoxically worsen injury via [[ROS generation]], [[calcium overload]], inflammation, and endothelial damage.
+
+**Animal model**: [[pMCAO]] (permanent middle cerebral artery occlusion) induces exactly this focal ischemia in rodents by permanently blocking the middle cerebral artery, per this note's own mechanism above.

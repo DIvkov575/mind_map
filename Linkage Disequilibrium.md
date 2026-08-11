@@ -7,3 +7,5 @@ LD arises because:
 3. **Population history**: [[bottlenecks]], [[bottlenecks|founder effects]], [[admixture]], [[genetic drift]]
 4. **Selection**: favorable alleles drag neighbors with them (hitchhiking).
 LD decays with **genetic distance**, not just physical distance.
+
+LD between two SNPs is bounded by their [[Minor Allele Frequency (MAF)|allele frequencies]] — a common allele can't be in strong LD with a very rare one, since there simply aren't enough carriers of the rare allele to establish a strong non-random association either way.

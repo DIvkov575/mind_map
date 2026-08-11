@@ -1,1 +1,4 @@
-motile (capable of motion) bacteria coupled to a synthetic magnetic component
+Motile (capable of motion) bacteria coupled to a synthetic magnetic component — an engineered version of what [[Magnetotactic bacteria]] evolved naturally: pair a motility source with an external magnetic-field steering mechanism.
+
+- unlike naturally magnetotactic species (which carry a *biogenic* magnetosome chain), a biohybrid typically attaches a synthetic magnetic particle (e.g. a magnetic nanoparticle) to an otherwise-ordinary motile bacterium's [[Motility Structures|flagellum/body]], so the coupling — not the organism's own biology — provides the magnetic steering
+- lets researchers remotely steer bacterial locomotion with an external field, useful for targeted micro-delivery applications (e.g. steering bacteria to a specific site in the body or a microfluidic device) without needing to genetically engineer magnetosome production

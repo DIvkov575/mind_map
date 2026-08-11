@@ -11,10 +11,10 @@ If the augmented model significantly reduces prediction error (typically via an 
 
 
 **Key properties**
-- It is **not true causality** (no intervention or mechanism implied).
+- It is **not true causality** (no intervention or mechanism implied) — unlike [[causal effect estimation]], which explicitly targets the counterfactual/interventional quantity; Granger causality only claims predictive information transfer
 - It is **directional**: X→YX \rightarrow YX→Y may hold without Y→XY \rightarrow XY→X.
 - It is **time-ordered**: future values cannot cause the past.
-- It assumes **stationarity** (or requires differencing / cointegration handling).
+- It assumes **stationarity** (or requires differencing / cointegration handling) — see [[Time Series Modeling]]'s stationarity-check step, a prerequisite before running this test
 
 **Common assumptions**
 - Linear relationships (in the classical formulation).

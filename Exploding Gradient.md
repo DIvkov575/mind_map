@@ -3,3 +3,4 @@
 	- Disproportionate updates?? - confim
 - Increase batch size
 - Decrease LR
+- Fix it at the source instead of clipping after the fact: [[Xavier (Glorot) Initialization]] (keep gradient variance stable at init) or [[Residual Connections]] (give the gradient a direct additive path around the problem layers)

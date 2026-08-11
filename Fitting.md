@@ -33,4 +33,4 @@
 - regularization techniques [[Lasso regularization (L1)]] [[Ridge regularization (L2)]]
 - (training) [[Dropout]] to reduce reliance on single features/neurons
 - [[Early stopping]] by monitoring validation error
-- 
+- more/better [[Inductive Bias]] — restrict the hypothesis space (architecturally or via regularization) toward solutions likely to generalize, before training even starts

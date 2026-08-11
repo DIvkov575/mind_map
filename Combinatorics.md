@@ -5,6 +5,7 @@
 [[Ordered Set Partition]]
 [[Stars and Bars]]
 [[Multiset]]
+[[Young Diagram]]
 
 Addition Principle
 Subtraction Principle

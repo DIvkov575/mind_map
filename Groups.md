@@ -12,6 +12,7 @@ Relevant Proprs
 ### Applications/Properties
 - [[Legrange Theorem]]
 - [[Representation Theory]]
+- [[Center (Group Theory)]] — the (always normal) subgroup of elements commuting with everything; measures how far $G$ is from abelian
 ### Main Classes
 **Permutation Group**
  Given any set X and a collection G of [[Bijection]]s of X into itself (known as permutations) that is closed under compositions and inverses, G is a group acting on X.

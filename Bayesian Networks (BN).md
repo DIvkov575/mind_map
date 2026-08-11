@@ -50,3 +50,9 @@ Three canonical structures:
     
 
 Colliders behave oppositely: conditioning on them _introduces_ dependence.
+
+---
+
+## 4. Relation to Structural Causal Models
+
+A BN's DAG only encodes conditional-independence structure — the factorization above says nothing about *mechanism*. [[Structural Causal Models (SCMs)]] add structural equations $Y = f(\text{parents}(Y), \epsilon_Y)$ over the same DAG, turning a purely probabilistic model into one that supports interventions and counterfactuals: a BN says which variables are dependent, an SCM says *how* one variable is generated from its parents, which is what identification of causal effects actually needs.

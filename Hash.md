@@ -24,3 +24,6 @@ $H(xy) = H(x) + p^{|x|}H(y) \pmod m$
 
 ---
 [[Iterated Hash]]
+
+---
+[[Bloom Filter]] — a probabilistic membership-checking data structure built directly on `k` independent hash functions over the same domain/range setup described above.

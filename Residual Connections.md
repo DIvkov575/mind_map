@@ -1,4 +1,4 @@
-- address the problem of **vanishing/exploding gradients** in deep networks
+- address the problem of **vanishing/[[Exploding Gradient|exploding]] gradients** in deep networks
 - (also called a skip connection) bypasses one or more layers and adds the input directly to the output of a layer.
 - Formally, if a block of layers computes a mapping $\mathcal{F}(x)$, the residual connection outputs:
 $$y = \mathcal{F}(x) + x$$

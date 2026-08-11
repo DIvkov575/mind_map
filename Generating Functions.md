@@ -12,6 +12,8 @@ Example 1: counting subsets.
 	Supposed you ahve an unlimited supply of itms, each contributing 0 or 1 to subset. Then each time contributes (1+x) to the generating function. 
 	So for 3 items, $(1+x)^3 = 1 +3x + 3x^2 + x^3$
 	Coefficients of x^2 is 3 -> 3 ways to choose 2 items
+Example 1.5: linear recurrences (e.g. Fibonacci) — encoding the recurrence as an algebraic relation on $A(x)$ gives a rational closed form whose partial-fraction expansion (over the characteristic equation's roots) directly yields an exponential closed form for $a_n$; see [[Binet's Formula]] for Fibonacci worked in full.
+
 Example 2: [[Ordered Set Partition | partitions]] of n
 	The generating function of the number of ways to write $n$ as the sum fo positive integers is:
 	$$

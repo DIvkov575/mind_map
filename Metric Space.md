@@ -10,3 +10,5 @@ $d(x, y) = 0 \iff x = y$
 $d(x, y) = d(y, x)$
 **Triangle Inequality**
 $d(x, z) \le d(x, y) + d(y, z)$
+
+Extending $d$ from points to *subsets* of $X$ gives the [[Hausdorff Distance]] — itself a metric on the space of (closed, bounded) subsets of $X$.

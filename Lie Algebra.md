@@ -21,6 +21,8 @@ Idea of Lie algebra $L$ is a subspace $I$ such that $$[x,y]\in I \quad\forall x\
 A center is a type of idea such that
 $$Z(L) = \{ x \in L ~|~ [x,y]=0 \quad\forall y\in L \}$$
 
+Since $Z(L)$ is an ideal, $L/Z(L)$ is always a well-defined [[Quotient (Factor) Algebra]].
+
 **Adjoint Homomorphism**
 if $L$ is a lie algebra, we define 
 $ad: L \to gl(L)$ by $(ad~x)(y) \coloneqq [x,y]$

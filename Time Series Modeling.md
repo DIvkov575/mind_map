@@ -28,6 +28,9 @@ If non-stationary:
 - Difference
 - Detrend
 - Work with returns / growth rates
+
+#### 4. Directional / predictive-information relationships
+[[Granger Causality]] — tests whether one series' past values improve prediction of another beyond that series' own past, a time-series-specific, non-interventional notion of "causality"
     
 
 ---
