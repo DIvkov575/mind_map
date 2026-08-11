@@ -1,3 +1,4 @@
+- Root cause: the gradient through many layers is a product of per-layer [[Jacobian]]s (chain rule) — consistently large/small singular values compound geometrically with depth.
 - Clipping gradients `torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)` will prevent explosins
 	- Too high LR will cause constant clipping - effectively low LR
 	- Disproportionate updates?? - confim

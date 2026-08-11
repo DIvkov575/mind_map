@@ -1,6 +1,8 @@
 
 
 
+A mechanistic-[[Interpretability]] technique.
+
 Jlense
 - Compute an averaged [[Jacobian]] at each layer
 	- linearized effect of an activation on next-token [[Logits]], averaged across ~1,000 diverse prompts.

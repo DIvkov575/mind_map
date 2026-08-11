@@ -1,5 +1,5 @@
 
-Applies scientific methods to establish facts about why a model acted as it did. 
+A behavioral/black-box approach to [[Interpretability]] — applies scientific methods to establish facts about why a model acted as it did, without opening up model internals. 
 • What mitigations will be sufficient to prevent the undesirable behavior.
 • Whether the AI system is pursuing undesirable goals.
 • Whether the behavior reflects a robust disposition or a fragile artifact of the specific setting.
