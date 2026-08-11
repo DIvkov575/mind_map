@@ -8,3 +8,7 @@ A topological space that locally looks like $\mathbb{R}^n$ — every point has a
 - real data (images, audio, embeddings) is hypothesized to lie on a low-dimensional manifold embedded in a much higher-dimensional ambient space (the manifold hypothesis)
 - density estimation with simple parametric blobs ([[Gaussian Mixture Model (GMM)]]) faces the [[Curse of Dimensionality]] trying to cover a manifold with points — motivates learning an explicit mapping from a simple base distribution instead ([[Variational Auto Encoder (VAE)]], [[Normalizing Flows]])
 - optimal-transport metrics like [[Wasserstein distance]] induce their own Riemannian-like structure on the space of distributions over a manifold (Otto calculus)
+
+**Maps between manifolds**
+- a map $f: M \to N$ is [[Smooth]] if its coordinate representation $\psi \circ f \circ \varphi^{-1}$ is smooth in the ordinary $\mathbb{R}^n$ sense, for every chart $\varphi$ on $M$ and $\psi$ on $N$ — smoothness is defined *locally, through charts*, since a manifold has no single global coordinate system
+- a [[Differentiable Manifolds|differentiable/differential manifold]] is a manifold equipped with enough structure (a maximal smooth atlas) to make calculus — derivatives, tangent vectors, integration — well-defined on it
