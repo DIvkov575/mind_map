@@ -1,3 +1,5 @@
+The Linear Representation Hypothesis (LRH) claims a model's internal concepts are encoded as linear directions in activation space — a discrete/combinatorial claim about structure (a basis of directions), distinct from the [[Manifold]] hypothesis's claim that high-dimensional data/activations lie on a smooth low-dimensional *continuous* surface. Both are hypotheses about hidden low-dimensional structure inside a high-dimensional representation, just different kinds of structure (linear-subspace vs. curved-manifold).
+
 Under the Linear Representation Hypothesis on ℎ, if the sequence of all latent thoughts with length 𝑚 can be expressed losslessly through corresponding text-based reasoning, then the length of text (in tokens) needs to be at least $\omega(\frac{d_h m} {log |V |})$ , where |V| denotes the vocabulary size
 
 

@@ -1,4 +1,4 @@
-The building block of proteins — a small molecule with an amino group, a carboxyl group, and a side chain (R group) that varies between the 20 standard amino acids and determines that residue's chemistry.
+The building block of proteins — a small molecule with an amino group, a carboxyl group, and a side chain (R group) that varies between the 20 standard amino acids and determines that residue's chemistry. The specific bond angles within a side chain come from its atoms' [[Electron Arrangements]].
 
 **Charge, relevant to [[Salt Bridge|salt bridges]]**
 - Positively charged (basic) side chains: Lysine (Lys/K), Arginine (Arg/R), Histidine (His/H)

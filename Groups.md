@@ -24,7 +24,7 @@ Relevant Proprs
 Elements are invertible matrices over a field (or ring), operation is matrix multiplication.
 - [[Linear Group GL(n)]] all invertible $n\times n$ matrices.
 - $SL_n(F)$ — determinant 1.
-- $O(n)$ / $SO(n)$ — orthogonal (preserve a symmetric bilinear form / length); $SO(n)$ is the rotation subgroup.
+- $O(n)$ / $SO(n)$ — orthogonal (preserve a symmetric bilinear form / length); $SO(n)$ is the rotation subgroup. Concrete use case: [[Electron Arrangements|per-residue rotation frames]] in protein structure representation are elements of $SO(3)$.
 - $U(n)$ / $SU(n)$ — unitary (complex, preserve Hermitian form).
 - $Sp(2n)$ — symplectic (preserve an alternating form).
 - Every finite group also embeds in some $GL_n$ (via its regular representation), so this class is universal too.

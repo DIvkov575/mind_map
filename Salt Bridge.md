@@ -2,4 +2,4 @@ A salt bridge is a noncovalent electrostatic attraction between oppositely charg
 
 Lys+ or Arg+ interacting with Asp− or Glu− (see [[Amino Acid]] for the full charge breakdown).
 
-These interactions can help stabilize a [[Protein Structure|protein's folded structure]]. “Salt” refers to the charge interaction, not a literal [[Salt]] crystal.
+These interactions can help stabilize a [[Protein Structure|protein's folded structure]]. “Salt” refers to the charge interaction, not a literal [[Salt]] crystal. The actual reach/strength of the interaction depends on the side chains' [[Electron Arrangements|geometry]], not just their charge sign.

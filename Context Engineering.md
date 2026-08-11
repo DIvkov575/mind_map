@@ -7,7 +7,9 @@ Applied concretely to a coding-agent's own session state (symbol indexes, sessio
 Compression — buy back tokens:
 - Extractive (keep top sentences by relevance) — cheap, lossy-but-safe.
 - Abstractive (LLM-summarize chunks) — higher compression, costs an LLM call.
-- Token-level (LLMLingua: a small model prunes low-perplexity tokens)
+
+Pruning — drop tokens instead of summarizing them:
+- Token-level (LLMLingua: a small model prunes low-perplexity tokens) — a concrete instance of [[Perplexity Model (input pruning)]]'s general "low-perplexity = predictable/redundant, safe to drop" principle.
 
 Caching — stop paying twice:
 - Prefix/prompt caching: cache the static system prompt + few-shot prefix (Anthropic, Google, vLLM support this natively). Pure cost win, near-zero complexity.

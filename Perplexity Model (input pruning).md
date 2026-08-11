@@ -1,4 +1,4 @@
-**Perplexity-based models for input pruning** are techniques that use a language model’s _per-token perplexity_ to remove low-importance parts of an input while preserving the model’s output behavior.
+**Perplexity-based models for input pruning** are techniques that use a language model’s _per-token perplexity_ to remove low-importance parts of an input while preserving the model’s output behavior — the general principle [[Context Engineering]]'s LLMLingua-style token pruning is one concrete instance of.
 
 ### Core idea
 

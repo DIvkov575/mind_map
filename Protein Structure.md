@@ -1,4 +1,4 @@
-A protein's 3D shape, determined by its amino-acid sequence folding into a stable conformation — the object every structural-biology technique in this vault is ultimately measuring, stabilizing, or predicting.
+A protein's 3D shape, determined by its amino-acid sequence folding into a stable conformation — the object every structural-biology technique in this vault is ultimately measuring, stabilizing, or predicting. See [[Electron Arrangements]] for how local bond geometry is represented, both chemically (VSEPR) and as the rotation frames ($SO(3)$) modern structure-prediction pipelines actually compute with.
 
 **Determining/storing structure**
 - Experimentally solved structures (X-ray crystallography, cryo-EM) are stored as [[mmCIF]] files — atomic coordinates, chains, residues, bonds, and experimental metadata in one extensible format.

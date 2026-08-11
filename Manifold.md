@@ -5,7 +5,7 @@ A topological space that locally looks like $\mathbb{R}^n$ — every point has a
 - a [[Smooth Group|smooth Lie group]] is a manifold with smooth composition
 
 **Why it matters for ML**
-- real data (images, audio, embeddings) is hypothesized to lie on a low-dimensional manifold embedded in a much higher-dimensional ambient space (the manifold hypothesis)
+- real data (images, audio, embeddings) is hypothesized to lie on a low-dimensional manifold embedded in a much higher-dimensional ambient space (the manifold hypothesis) — a *continuous*-structure counterpart to the [[Linear Representation Hypothesis]]'s claim that a model's concepts sit along discrete linear directions instead
 - density estimation with simple parametric blobs ([[Gaussian Mixture Model (GMM)]]) faces the [[Curse of Dimensionality]] trying to cover a manifold with points — motivates learning an explicit mapping from a simple base distribution instead ([[Variational Auto Encoder (VAE)]], [[Normalizing Flows]])
 - optimal-transport metrics like [[Wasserstein distance]] induce their own Riemannian-like structure on the space of distributions over a manifold (Otto calculus)
 
