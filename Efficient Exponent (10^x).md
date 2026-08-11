@@ -1,7 +1,7 @@
 
 Modify exp var and baes dsimultaneously -> O(lg(x)) semi-naive process
 
-
+An instance of the general [[Numerical Approximation Methods]] toolkit:
 Additinoal Tricks
   
   - Range reduction makes the input small and easy to approximate.

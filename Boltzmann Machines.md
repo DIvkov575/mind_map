@@ -10,7 +10,7 @@ Negative sampling: "unclamp" observable values and run [[Gibbs Sampling]] with a
 Update weights according to $\partial \log P(x)/\partial w_{ij} = \langle s_is_j\rangle_{data} - \langle s_is_j\rangle_{model}$
 
 Model data as the equilibrium distribution of a stochastic energy-based network
-- Uses [[Hebbian Learning]] rule - updates weights to encourage jointly firing neurons to fire together more often
+- Uses the [[Neuron Model|Hebbian Learning]] rule - updates weights to encourage jointly firing neurons to fire together more often
 - [[Sherrington–Kirkpatrick]] with external field
 - Stochastic [[Ising Model]] (a type of [[Stochastic Neural Network (SNN)]])
 

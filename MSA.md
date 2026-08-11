@@ -1,2 +1,3 @@
 MSA (Multiple Sequence Alignment) data = aligned [[Homolog]]ous biological sequences used as an evolutionary feature representation.
 - potentially sequenced from different organisms
+- co-varying residues across an MSA are a standard signal for inferring [[Protein Structure]] — residues under co-evolutionary pressure to move together are usually in physical contact in the folded structure

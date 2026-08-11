@@ -1,4 +1,4 @@
-**mmCIF** stands for **Macromolecular Crystallographic Information File**. It is a structured text file format used to store detailed information about **biological macromolecules**, especially protein and nucleic acid structures.
+**mmCIF** stands for **Macromolecular Crystallographic Information File**. It is a structured text file format used to store detailed information about **biological macromolecules**, especially [[Protein Structure|protein and nucleic acid structures]].
 
 mmCIF is the modern replacement for the older **PDB (.pdb)** format used by the Protein Data Bank.
 

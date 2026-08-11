@@ -1,7 +1,7 @@
 The Cerebral Cortex is the thin outer layer of neural tissue covering the two hemispheres of the [[Cerebrum]]
 - **Thickness:** ~2–4 mm
 - **Structure:** highly folded sheet ([[Gyri]] and [[Sulci]])
-- **Composition:** [[Gray Matter]] (neuronal cell bodies, dendrites, synapses)
+- **Composition:** [[Gray Matter]] (neuronal cell bodies, dendrites, synapses) — see [[Neuron Model]] for how the individual units in this tissue get abstracted mathematically
 
 | Function           | Description                                    |
 | ------------------ | ---------------------------------------------- |

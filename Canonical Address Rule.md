@@ -1,4 +1,4 @@
-rRule applies to **64-bit x86 processors** and defines which virtual addresses are considered valid.
+Rule applies to **64-bit x86 processors** and defines which virtual addresses the [[Kernel (OS)|kernel]]'s memory-management unit considers valid.
 
 Although x86-64 uses **64-bit pointers**, current CPUs do **not implement all 64 bits** of virtual address space.
 

@@ -1,5 +1,5 @@
 **Verbose Narrative Description**
-Kernel constructs that makes program think its talking to a real terminal (when really its another program)
+[[Kernel (OS)|Kernel]] construct that makes program think its talking to a real terminal (when really its another program)
 
 Terminal programs (vim, bash, top) are written assuming a human is at a physical terminal: they expect line editing, Ctrl-C, screen resizing, etc. But often you want to drive that same program from another program instead — ssh, tmux, a terminal emulator, an IDE. 
 
@@ -60,7 +60,7 @@ read(master_fd, buf, sizeof(buf)); // capture bash's screen output
 
 
 -----
-Real [[Teletypewritter (TTY)]] is backed by hardware. PTTY is a software-only pair of virtual [[Device (Kernel)]]s that hte kernle exposes
+Real [[Teletypewritter (TTY)]] is backed by hardware. PTTY is a software-only pair of virtual devices that the [[Kernel (OS)|kernel]] exposes
 
 Master Side (PTY) - held by controlling program (terminal emulator, sshd, tmux, Claude, etc)
 Slave side (TTY) - held my the child process (eg. vim, top, etc) which sees it as "/dev/pts/N" (linux) or "/dev/ttysN" (BSD)

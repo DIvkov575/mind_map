@@ -1,5 +1,7 @@
 
 
+One layer of [[Distributed Compute]], specific to splitting ML training across devices.
+
 **Data Paralelism**
 Dataset too big
 [[Collective Operation|All Reduce]]

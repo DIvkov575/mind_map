@@ -1,0 +1,6 @@
+Coordinating computation across more than one device — the layer above what a single [[GPU]] can do alone, and the layer [[ML Distributed Training]]'s data/model-parallelism techniques operate at.
+
+- **why it's a separate concern from single-device performance**: a single GPU's [[Streaming Multiprocessing Unit (SM)|SM]]/[[Warp]]/[[cuBLAS|GEMM]] optimizations make one device's compute as fast as possible; distributed compute is about what to do once one device (or one device's memory) isn't enough — splitting either the *data* or the *model* across many devices and coordinating the result
+- **Data parallelism**: every device holds a full copy of the model, each processes a different data shard, and gradients are synchronized across devices (e.g. via [[Collective Operation|All-Reduce]] or a [[Parameter-server]])
+- **Model parallelism**: the model itself is too large for one device, so it's split across devices instead — [[Sharded Data Parallelism]], [[Tensor Parallelism]], and [[Expert Parallelism]] (splitting a [[Mixture of Experts (MoE)|Mixture-of-Experts]] model's experts across devices) are different ways to cut up which piece of the model lives where
+- the communication pattern connecting devices (who talks to whom, in what topology) is its own design space — see [[Hypercube (communication pattern)]], [[Butterfly Algorithm]]

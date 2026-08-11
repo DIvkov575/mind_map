@@ -1,5 +1,5 @@
 
-- protein attached to surface
+- [[Protein Structure|protein]] attached to surface
 - solution containing target flowed across
 - record signal on how surface changes over time
 	- high binding increases signal

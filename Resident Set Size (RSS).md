@@ -1,4 +1,4 @@
-The amount of a process's memory that is currently held in physical RAM (as opposed to swapped out to disk or never paged in)
+The amount of a process's memory that is currently held in physical RAM (as opposed to swapped out to disk or never paged in) — one of the [[Kernel (OS)|kernel]]'s own accounting metrics for process memory.
 
 [[Proportional Set Size (PSS)]]
 
