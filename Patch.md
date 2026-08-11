@@ -1,0 +1,5 @@
+A small, fixed-size sub-region of an input (e.g. a $16\times16$ block of pixels) treated as one unit — the standard way vision transformers and patch-based generative models decompose an image.
+
+- **ViT-style attention**: an image is split into non-overlapping patches, each linearly embedded into a token, and standard [[Attention Saliency / Proxy Model (input pruning)|attention]] runs over the resulting sequence of patch tokens
+- **autoregressive image generation**: some [[Autoregressive Models]] generate patch-by-patch rather than pixel-by-pixel, trading resolution for tractable sequence length (see the note's discussion of why AR dominates text but is less common for images)
+- because attention operates on whole patches, fine per-pixel detail (e.g. object boundaries) gets lost at the patch boundary — motivating upsampling schemes like [[Vision-Model Input Optimization|FeatUp's joint bilateral upsampler]] that try to recover pixel-level structure from patch-level attention maps, and evaluation techniques like [[Seam Carving]] to check whether resizing preserves the features a downstream ViT relies on
