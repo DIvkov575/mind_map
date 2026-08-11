@@ -1,4 +1,4 @@
-A hard lower bound on the variance any unbiased estimator can achieve:
+A result within [[Estimator Theory]]: a hard lower bound on the variance any unbiased estimator can achieve:
 $$\mathrm{Var}(\hat{\theta}) \succeq \mathcal{I}(\theta)^{-1}$$
 where $\mathcal{I}(\theta)$ is [[Fisher Information]] — no unbiased estimator can ever beat this floor, no matter how clever.
 

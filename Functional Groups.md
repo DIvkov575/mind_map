@@ -3,8 +3,8 @@ A specific group of atoms within a molecule responsible for that molecule's char
 **Common examples**
 - Hydroxyl (–OH): alcohols
 - Carbonyl (C=O): aldehydes/ketones
-- Carboxyl (–COOH): carboxylic acids
-- Amine (–NH₂): amines — basic, proton-accepting
+- Carboxyl (–COOH): carboxylic acids — one of the two groups every [[Amino Acid]] carries by definition
+- Amine (–NH₂): amines — basic, proton-accepting; the other group every amino acid carries, and (on certain side chains, e.g. Lysine's) the source of that side chain's basicity/charge
 - Aromatic ring (e.g. [[Benzene]], a 6-carbon ring with delocalized π-electrons): a functional group in its own right, and also a building block other functional groups fuse onto
 
 **Fused-ring functional groups**

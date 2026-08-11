@@ -1,5 +1,5 @@
 - How do I maximize the probability of seeing this data  $p_\theta(\text{data})$?
-- MLE method for estimating the parameters of a statistical model from observed data [[Parameter Estimation]]
+- MLE method for estimating the parameters of a statistical model from observed data [[Parameter Estimation]] — judged against the properties [[Estimator Theory]] cares about (bias, variance, consistency, efficiency).
 - Given data + family of distributions indexed by parameters θ, pick the θ that makes the observed data most probable. 
 
 **Formally:** 
