@@ -1,0 +1,6 @@
+The practical craft of getting a model trained and running efficiently — as distinct from ML *theory* (which model class, which objective). Splits into two concerns that are easy to conflate but address different bottlenecks:
+
+- **Model-quality practicalities**: making a *given* model train stably and generalize — [[Fitting|bias/variance and over/underfitting]], [[Xavier (Glorot) Initialization|weight initialization]], [[Exploding Gradient|gradient stability]], [[Residual Connections]]. These matter even on a single device with a small model.
+- **Systems-scale practicalities**: making training/serving *fit* and run fast given hardware constraints — [[ML Performance Optimization]] (mixed-precision, activation checkpointing/offloading, delayed parameter init) and [[ML Distributed Training]] (splitting data or model across devices via [[Distributed Compute]]) exist because a model or dataset outgrows what one device can hold or process in reasonable time.
+
+The two concerns compose: a systems-scale fix (e.g. mixed precision) can reintroduce a model-quality problem (numerical instability, effectively an [[Exploding Gradient|exploding/vanishing gradient]] issue in lower precision) that the model-quality toolkit above is what actually fixes.

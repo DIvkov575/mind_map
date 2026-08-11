@@ -31,7 +31,7 @@ Maximalist Harness (4 Layers)
 |     |     |
 
 
-**Layer 4** - Persistence + Analysis
+**Layer 4** - Persistence + Analysis ([[Context Engineering]] applied to a coding agent's session state)
 
 5-layer static analysis that replaces reading raw code:
 L1: AST        → "what functions exist?" (signatures, classes)

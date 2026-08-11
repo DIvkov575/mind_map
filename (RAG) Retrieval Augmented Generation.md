@@ -9,3 +9,4 @@ Embed -> top-k -> concat -> generate
 - [[HyDE]]
 - [[Hybrid Sparse-Dense Vector Search]]
 - [[Reciprocal-Rank Fusion]]
+- [[Corrective Retrieval-Augmented Generation (CRAG)]] — adds a self-correction step that evaluates retrieved-document relevance before generation

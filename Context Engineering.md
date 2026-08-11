@@ -1,6 +1,8 @@
 
 See [[(RAG) Retrieval Augmented Generation]]
 
+Applied concretely to a coding-agent's own session state (symbol indexes, session handoffs, past-session archival) in [[Continuous Claude V3]].
+
 
 Compression — buy back tokens:
 - Extractive (keep top sentences by relevance) — cheap, lossy-but-safe.
