@@ -1,34 +1,24 @@
-Learns an invertible mapping $f_\theta: z \leftrightarrow x$ so that $x = f_\theta(z)$ transforms a simple distribution $p_0(z)$ into $p_{\text{data}}(x)$
-Uses change of variable formula 
+Learns an invertible mapping $f_\theta: z \leftrightarrow x$ transforming a simple base distribution $p_0(z)$ into $p_{\text{data}}(x)$, via the change-of-variables formula:
 $$p_{\text{data}}(x) = p_0(f_\theta^{-1}(x)) \left| \det \frac{\partial f_\theta^{-1}}{\partial x} \right|$$
 
-Procedure
-1) Choose base distribution
-2) Determine # layers $x = f_K \circ f_{K-1} \circ \dots \circ f_1(z)$ where each $f_k$ invertible with [[Jacobian]]
-3) Pick transformation types
-	1) Affine
-	2) Coupling Layers ([[RealNVP]] / [[Glow]])
-		$x_a = z_a, \quad x_b = z_b \odot \exp(s_\theta(z_a)) + t_\theta(z_a)$
-		here $s_\theta$ and $t_\theta$ are small neural networks
-		Split dimensions, transform one half conditioned on the other.
-		(upper/lower) Triangular Jacobian (hence cheap) $\det J = \prod \exp(s_i)$
-	3) Autoregressive Flows - depend on outputs of previous layers...
-		$x_i = \mu_\theta(z_{<i}) + \sigma_\theta(z_{<i}) \cdot z_i$
-		Sequential, Triangular Jacobian
-	4) Continuous Flows ([[Neural ODE]] [[FFJORD]])
-		$\frac{dx}{dt} = v_\theta(x,t), \quad x(0) = z$
-		Density evolves wtih 
-		$\frac{d \log p(x(t))}{dt} = - \text{Tr}\Big(\frac{\partial v_\theta}{\partial x}\Big)$
-4) Compute Density?
-5) Train maximize likelihood on your data $\{x_i\}$
-	$\mathcal{L}(\theta) = \sum_i \log p_X(x_i)$
-6) Sample from flow
+Stack $K$ invertible layers with tractable Jacobians, $x = f_K \circ \dots \circ f_1(z)$. Train by maximizing $\mathcal{L}(\theta) = \sum_i \log p_{\text{data}}(x_i)$; sample by drawing $z\sim p_0$ and pushing forward through $f_\theta$.
 
+Layer types (all trade expressiveness vs. Jacobian cost):
+- Affine - simplest, limited expressiveness alone
+- Coupling Layers ([[RealNVP]] / [[Glow]]) - split dims, transform one half conditioned on the other:
+  $$x_a = z_a, \qquad x_b = z_b \odot \exp(s_\theta(z_a)) + t_\theta(z_a)$$
+  Triangular Jacobian, cheap: $\det J = \prod_i \exp(s_i)$. Parallel to invert.
+- Autoregressive Flows - each $x_i$ conditioned on previous outputs:
+  $$x_i = \mu_\theta(z_{<i}) + \sigma_\theta(z_{<i}) \cdot z_i$$
+  Same triangular-Jacobian trick, but sequential (not parallel) to invert. [[IAF]] conditions on $z_{<i}$ (fast sample/slow density); [[MAF]] conditions on $x_{<i}$ (opposite tradeoff)
+- Continuous Flows ([[Neural ODE]], [[FFJORD]], [[Continuous Normalizing Flows (CNFs)]]) - infinitely many infinitesimal layers:
+  $$\frac{dx}{dt} = v_\theta(x,t), \qquad \frac{d \log p(x(t))}{dt} = -\text{Tr}\left(\frac{\partial v_\theta}{\partial x}\right)$$
+  Trace instead of determinant (Hutchinson's trick) - drops the discrete flow's cheap-Jacobian architectural constraint entirely.
 
 Shortcomings:
-- Jacobian of Determinant is expesnive in high dimensiosn
-- Needs **careful architectural constraints** to keep invertibility tractable.
-- Can struggle with complex distribtutions
-
-
-[[Continuous Normalizing Flows (CNFs)]]
+- Jacobian determinant is expensive in high dimensions
+	- hence triangular-Jacobian architectures (coupling/autoregressive layers, $O(d)$ determinant) as the immediate fix
+	- subsequently continuous-time formulation, where a trace replaces the determinant via [[Hutchinson's Trick]]) - this is what [[Continuous Normalizing Flows (CNFs)|CNF]
+- CNF training is slow/unstable
+	- maximizing likelihood requires backpropagating through an ODE solve (expensive forward simulation + adjoint backward pass, discretization error)
+	- hence [[Flow Matching]]: skip simulating the ODE during training entirely, regress $v_\theta$ onto a simple prescribed conditional path (e.g. linear interpolation noise→data) - simulation-free, stable regression loss instead of likelihood-through-an-ODE-solver.

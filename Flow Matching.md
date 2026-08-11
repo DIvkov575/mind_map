@@ -1,3 +1,5 @@
+ "take CNF's object, but train it using diffusion's simulation-free strategy, generalized beyond the Gaussian-only path diffusion was stuck with"
+ 
 framework for training continuous-time generative models by directly learning a vector field that transports a simple base distribution (e.g., Gaussian noise) into a target data distribution.
 - learns how a probability distribution evolves
 - The learned vector field defines a mass-preserving transport
@@ -30,4 +32,4 @@ Examples:
 
 Similar
 [[Neural ODE]] is a broader class of vector space learning, however flow matching NODE learns to match probability distribution
-[[Diffusion Models]] can be thought of as noise flow matching
+[[Diffusion Models]] can be thought of as noise flow matching"

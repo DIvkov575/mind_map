@@ -1,0 +1,2 @@
+
+**Sandbox.** The execution environment itself — a firecracker microvm containing the initialized language runtime (e.g., JVM process), your loaded code, any state your code built (static caches, open connections), and a /tmp scratch filesystem. "Sandbox" is the term used at this layer for what's colloquially called an "execution environment."

@@ -1,0 +1,1 @@
+The component that receives your Invoke API call first. Its job is to figure out where to send the request next, then relay the customer's actual request payload once it has that answer.

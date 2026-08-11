@@ -1,0 +1,3 @@
+Family of methods for sampling from a distribution $p(\cdot)$ known only up to its normalizing constant () i.e., you can evaluate $\tilde{p}(\theta) \propto p(\theta)$ but not $p(\theta)$ itself)
+ Construct a Markov chain whose stationary distribution is exactly $p$, run it, and its samples (after "burn-in") are (correlated) draws from $p$. 
+ Common instances: [[Gibbs sampling]], [[Metropolis-Hastings]].

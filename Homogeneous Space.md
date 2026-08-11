@@ -1,6 +1,6 @@
 Very informally, a space that looks the same everywhere as one moves through it, with movement given by the [[Group Actions|action]] of a [[Groups|group]]
 
-Homogeneous spaces occur in the theories of [[Lie groups]], algebraic groups and topological groups.
+Homogeneous spaces occur in the theories of [[Lie Groups]], algebraic groups and topological groups.
 
 
 Homogeneous space for a group $G$ is a [[Non-Empty]] manifold or topological space $X$ on which G acts transitively (The action of G on X s called _transitive_ if for any two points $x,y \in X$ there exists a $g \in G$ so that $g \cdot x = y$). The elements of $G$ are called the symmetries of X.

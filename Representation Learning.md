@@ -19,4 +19,4 @@ techniques that allow a system to automatically discover the representations nee
 - [[Locally Linear Embedding]]
 **Self-Supervised Learning**
 - [[Auto Encoder]]
-- [[Boltzmann machine | RBM]] can be viewed as a single layer architecture for unsupervised feature learning. In particular, the visible variables correspond to input data, and the hidden variables correspond to feature detectors. The weights can be trained by maximizing the probability of visible variables using [[Hinton's Contrastive Divergence (CD)]] Learning Algorithm
+- [[Boltzmann Machines| RBM]] can be viewed as a single layer architecture for unsupervised feature learning. In particular, the visible variables correspond to input data, and the hidden variables correspond to feature detectors. The weights can be trained by maximizing the probability of visible variables using [[Hinton's Contrastive Divergence (CD)]] Learning Algorithm

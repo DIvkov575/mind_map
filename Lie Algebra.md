@@ -7,7 +7,11 @@ antisymmetry $[x,y] = -[y,x]$ is implied
 
 
 
+### Intuition
 
+
+
+### Properties
 **Ideal**
 Idea of Lie algebra $L$ is a subspace $I$ such that $$[x,y]\in I \quad\forall x\in L~y \in I$$Assume $I, J \in L$ and that $I,J$ are ideals
 - $I \cap J$ and $I + J$ are both ideals
@@ -34,3 +38,8 @@ let $Der A$ be the set of all derivations. The set is closed under vector additi
 **Structure Constants**
 If $L$ is a lie algebra over $F$ with basis $(x_1 \dots x_n$)$ then $[-,-]$ is completely determined by structure constants (with respect to basis) $a_{ij}^k \in F$ such that $$[x_i,x_j] = \sum_{k=1}^n a_{ijk} x_k$$
 Consider $SL_2$ = span({ 0100 0010 100-1}) 
+
+
+**Representation**
+[[Representation Theory]]
+A representation of the Lie algebra is a linear map $d\rho: \mathfrak{g} \to \mathfrak{gl}(V)$ that preserves the bracket: $d\rho([X,Y]) = d\rho(X)d\rho(Y) - d\rho(Y)d\rho(X)$. This is related to a group representation $\rho$ by $\rho(\exp(X)) = \exp(d\rho(X))$ — the algebra rep is the derivative of the group rep at the identity.

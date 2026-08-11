@@ -5,6 +5,6 @@ $f(f(x)) = x \quad \text{for all } x \in X$
 - [[Hermitian]] involution$A^* = A$
 - Self-[[Adjoint]] involution (functional analysis)
 - **Fundamental symmetry** ([[Krein spaces]])
-- In [[GL(n)]]: an **involution**
+- In [[Linear Group GL(n)]]: an **involution**
 - In O(n) or U(n): a **reflection**
 - In [[Coxeter theory]]: **simple reflection**
