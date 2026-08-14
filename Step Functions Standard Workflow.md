@@ -1,30 +1,25 @@
-The durable [[Step Functions]] workflow type for long-running, auditable orchestration.
+The durable [[Step Functions]] workflow type. Standard persists execution progress across transitions, so workflows can wait without keeping a process or [[Lambda]] environment alive.
 
-### Semantics and hard limits
+### Integration patterns and compute lifetime
 
-- Maximum execution and task duration: **1 year**.
-- Maximum execution history: **25,000 events**. If event 25,000 is not `ExecutionSucceeded`, the execution fails from history exhaustion.
-- Closed execution history is retained for **90 days** by default; completed executions can be redriven for **14 days**.
-- Maximum state, task, or execution input/output: **256 KiB**.
-- Maximum open executions: **1,000,000** per account per Region by default; adjustable to millions.
-- Workflow execution is exactly-once unless explicit retry behavior repeats work.
-- Supports all integration patterns, including job-run, callback, Activities, and [[Step Functions Distributed Map]].
+- Request/response: Step Functions invokes Lambda or another API and advances when the API call completes. A Lambda environment is occupied only through function completion.
+- Run a job (`.sync`): Step Functions waits for a supported service job. Use the native integration instead of a Lambda that polls the job.
+- Callback with task token: a worker starts asynchronous work and returns; Step Functions stores the wait. The eventual callback advances the workflow without holding the original Lambda environment.
+- Wait state: Step Functions schedules the future transition. Sleeping inside Lambda instead occupies concurrency for the entire delay.
 
-### Throughput model
+### Standard hot path
 
-Let $S$ be average state transitions per execution. Sustainable starts are bounded by
-
-$$R_{\text{workflow}}\le\min\left(R_{\text{StartExecution}},\frac{R_{\text{StateTransition}}}{S}\right).$$
-
-In `us-east-1`, `us-west-2`, and `eu-west-1`, defaults are **300 starts/s** and **5,000 transitions/s** after burst tokens. The crossover is $5000/300=16.7$ transitions/execution. A 10-transition workflow is start-limited at 300/s; a 20-transition workflow is transition-limited at 250/s. Other Regions default to 150 starts/s and 800 transitions/s, crossing over at 5.33 transitions/execution.
+Each state adds transition scheduling and durable history work. A Lambda Task additionally pays Lambda routing, warm or cold assignment, handler duration, and response serialization. Remove states only when they add no retry, audit, compensation, or domain boundary.
 
 ### Optimization
 
-- Use native service integrations when they remove a Lambda hop; every removed Lambda Task avoids one invocation, its latency, and its concurrency demand.
-- Keep execution data below 256 KiB. Store large payloads in S3 and pass the object reference.
-- Split long histories before 25,000 events. Distributed Map gives each child a separate history; nested executions can continue long-running workflows with a fresh history.
-- Set explicit task and workflow timeouts. Callback tasks should set heartbeat below task timeout so a dead worker fails before the overall task deadline.
-- AWS's retry example for transient Lambda service exceptions starts at **2 seconds**, doubles delay, and allows **6 attempts**. Treat these as a starting point; retries amplify Lambda load and must be included in capacity calculations.
-- Billing is per transition, so collapsing avoidable orchestration steps reduces both transition demand and cost. Preserve steps that provide necessary retries, audit boundaries, or compensation.
+1. Replace poller, sleeper, and pass-through Lambdas with native `.sync`, callback, Wait, and service integrations.
+2. Return from callback starter Lambdas immediately after durable handoff; never keep the invocation open while external work runs.
+3. Set task timeout and callback heartbeat so abandoned work releases workflow capacity promptly.
+4. Keep state payloads below 256 KiB; pass object references to avoid repeated serialization and history growth.
+5. Treat every retry as a new downstream call and, for Lambda, a new allocation attempt. Use backoff and idempotency to prevent retry bursts.
+6. Split execution before the 25,000-event history limit; use child workflows or Distributed Map when the decomposition also improves isolation.
 
-Sources: [Choosing a workflow type](https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html), [Step Functions quotas](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html), and [Step Functions best practices](https://docs.aws.amazon.com/step-functions/latest/dg/sfn-best-practices.html).
+Standard can run for up to 1 year. That duration belongs in workflow state, not in a continuously running Lambda.
+
+Sources: [Standard workflows](https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html), [service integration patterns](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html), and [callback tasks](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token).

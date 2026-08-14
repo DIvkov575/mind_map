@@ -1,54 +1,38 @@
-The end-to-end quantitative envelope for [[Step Functions]] workflows invoking [[Lambda]]. Step Functions allocates orchestration and Lambda independently allocates compute; the smallest limit wins.
+The allocation boundary for [[Step Functions]] workflows that invoke [[Lambda]]. Step Functions schedules states; Lambda allocates compute only when a Lambda Task is dispatched.
 
-Let:
+### Compute demand
 
-- $E$ = workflow starts/s
-- $S$ = Standard state transitions/workflow
-- $L$ = Lambda invokes/workflow
-- $A$ = expected Lambda attempts per logical invoke, including retries
-- $D$ = mean Lambda duration in seconds
-- $C$ = usable Lambda concurrency
+For $E$ workflow starts/s, let Lambda task $i$ execute $a_i$ attempts per workflow and occupy an environment for mean duration $D_i$ seconds. Steady Lambda concurrency is
 
-### Steady-state conditions
+$$C_{\lambda}=E\sum_i a_iD_i.$$
 
-$$E\le R_{\text{StartExecution}}$$
+Parallel branches add their occupied durations. Wait states, choices, callback waiting, and native integrations contribute no Lambda-seconds. Cold Init increases request latency and allocation work; handler and extension duration determine how long an environment remains unavailable for reuse.
 
-$$ES\le R_{\text{StateTransition}}$$
+### Dispatch-to-allocation path
 
-$$ELA\le R_{\text{Lambda requests}}$$
+1. Step Functions makes a task runnable subject to its start, transition, or Map dispatch rate.
+2. A Lambda Task sends an invoke; Step Functions has not reserved an environment beforehand.
+3. Lambda admits against reserved/account concurrency, assigns an idle environment, or creates one through [[(Lambda) Placement]].
+4. Lambda releases the environment after runtime and extensions finish; Step Functions then advances or keeps waiting in its own state.
 
-$$ELAD\le C.$$
+For a sudden burst, immediately warm capacity is existing idle inventory plus provisioned concurrency. Additional on-demand capacity can grow by at most 1,000 environments per function per 10 seconds. Step Functions can dispatch faster than that, so Map or Express fan-out must be bounded at the producer.
 
-For synchronous Lambda, $R_{\text{Lambda requests}}\le10C$. Therefore
+### Highest-leverage optimizations
 
-$$E_{\max}\le\min\left(R_{\text{StartExecution}},\frac{R_{\text{StateTransition}}}{S},\frac{10C}{LA},\frac{C}{LAD}\right).$$
+1. Delete Lambda relays. Native service integrations avoid invoke routing, cold allocation, handler duration, and another retry boundary.
+2. Externalize waiting. Standard Wait, `.sync`, and callback states hold workflow state without holding Lambda compute.
+3. Reduce occupied duration. Reuse connections, batch downstream calls, tune memory/CPU, and minimize extensions; every reduction in $D_i$ releases concurrency proportionally.
+4. Bound fan-out. Set Map, SQS event-source, or producer concurrency from downstream capacity and Lambda reserved concurrency.
+5. Control attempts. Retries and duplicate delivery increase $a_i$ and can create a second allocation wave. Use idempotency, backoff, partial batch response, and targeted redrive.
+6. Batch deliberately. Fewer child workflows and Lambda invocations improve allocation reuse, but larger failure domains and latency eventually dominate.
 
-The $10C/(LA)$ request term dominates for mean duration below 100 ms; $C/(LAD)$ dominates above 100 ms. For Express workflows, remove the Standard transition term, but keep Lambda and downstream constraints.
+### Queue boundaries
 
-### Worked Standard example
+- Synchronous Lambda above available capacity throttles at invocation.
+- Asynchronous Lambda queues accepted events before compute allocation.
+- SQS keeps unprocessed work in the source queue; poller ramp can be slower than Lambda's allocation ramp.
+- Standard Step Functions durably retains workflow progress; Express provides no durable execution history.
 
-Major Region, $S=20$, $L=2$, $A=1$, $D=0.25$ s, and $C=100$:
+Measure orchestration throttles, Lambda concurrent executions and spillover, queue age, Init duration, warm duration, retries, and downstream saturation on the same timeline. Optimize the first boundary that delays completion, not the largest advertised quota.
 
-- Starts permit 300 workflows/s.
-- Transitions permit $5000/20=250$ workflows/s.
-- Lambda request rate permits $10\times100/2=500$ workflows/s.
-- Lambda concurrency permits $100/(2\times0.25)=200$ workflows/s.
-- Final steady bound: $\min(300,250,500,200)=\mathbf{200}$ workflows/s.
-
-At that rate Lambda receives 400 invokes/s and holds about 100 concurrent environments. Adding a 10% concurrency buffer requires about 110 usable units.
-
-### Retry amplification
-
-If 5% of Lambda attempts require exactly one retry, $A=1.05$. The same example becomes $100/(2\times1.05\times0.25)=190.5$ workflows/s. Retries also add Step Functions transitions, so both $A$ and $S$ must include the retry policy's observed behavior.
-
-### Boundary mismatches
-
-- Step Functions limits state/task/execution data to **256 KiB**, which is tighter than Lambda's **6 MB** synchronous payload limit. Crossing Step Functions therefore makes 256 KiB the end-to-end boundary; pass S3 references for larger data.
-- A Distributed Map can dispatch up to **1,000 Express** or **100 Standard** children/s, but maximum concurrency must be capped by Lambda and downstream capacity.
-- Lambda SQS standard polling adds only **300 concurrent invokes/minute**, much slower than Lambda's direct per-function scale rate. Queue backlog can therefore be poller-limited even when Lambda concurrency is free.
-
-### Burst conditions
-
-Steady-state formulas are necessary but not sufficient. Bursts additionally consume Step Functions token-bucket depth, Lambda's **1,000 environments/10 s/function** scale allowance, provisioned-concurrency baseline, warm-environment inventory, SQS poller ramp, and Distributed Map child-dispatch rate. Size each burst as an initial inventory plus refill over the burst duration; do not treat a refill rate as instantly available capacity.
-
-See [[Lambda Concurrency and Scaling]], [[Lambda SQS Event Source Mapping Scaling]], [[Step Functions Quotas]], and [[Step Functions Distributed Map]].
+See [[Lambda Concurrency and Scaling]], [[Lambda SQS Event Source Mapping Scaling]], [[Step Functions Distributed Map]], and [[Step Functions Quotas]].

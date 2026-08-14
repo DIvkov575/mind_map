@@ -1,33 +1,29 @@
-A high-concurrency Map processing mode inside a [[Step Functions Standard Workflow]]. Each item or batch runs as a separate Standard or Express child workflow with its own execution history.
+A [[Step Functions Standard Workflow]] fan-out mechanism. A Map Run enumerates items or batches and starts one Standard or Express child workflow per unit of work.
 
-Use Distributed mode when Inline Map would be constrained by more than **40** concurrent iterations, a dataset above **256 KiB**, or a parent history approaching **25,000 events**.
+### Allocation path
 
-### Hard limits and dispatch rates
+1. The Map Run reads an item or batch.
+2. Child-workflow dispatch starts a separate execution.
+3. When that child reaches a Lambda Task, it independently invokes [[Lambda]]. No Lambda environment is allocated before that point.
+4. The child releases Lambda compute after each task, even while the child workflow continues.
 
-| resource | limit |
-|---|---:|
-| open Map Runs/account/Region | 1,000 |
-| parallel children/Map Run | 10,000 |
-| Map Run redrives | 1,000 |
-| Express-child dispatch | up to 1,000/s |
-| Standard-child dispatch | up to 100/s |
+Maximum Map concurrency is a scheduler ceiling, not reserved capacity. A Map Run can allow up to 10,000 parallel children, while child dispatch is up to 1,000 Express children/s or 100 Standard children/s. Lambda admission, its 1,000 new environments/10 seconds/function ramp, account concurrency, and downstream limits still apply afterward.
 
-Omitting maximum concurrency or setting it to zero permits up to 10,000 parallel children. This is usually unsafe when a child calls a capacity-limited service.
+If child start rate is $r$ and each child consumes $D_{\lambda}$ Lambda-seconds, approximate steady Lambda demand is
 
-### Capacity model
+$$C_{\lambda}\approx rD_{\lambda},$$
 
-Let $M$ be configured child concurrency, $D_c$ mean child duration, $B$ items per child, and $r_d$ child dispatch/s. Steady item throughput is bounded by
+capped by configured child concurrency when only one Lambda task is active per child. Parallel Lambda tasks inside a child add their occupied durations.
 
-$$R_{\text{items}}\le B\min\left(r_d,\frac{M}{D_c}\right).$$
+### Optimization
 
-If each child can have one Lambda invocation active at once, also require $M\le C_{\lambda}$. More generally, if each child can hold $k$ simultaneous Lambda invocations, require $kM\le C_{\lambda}$.
+1. Set maximum concurrency from the narrowest downstream and Lambda limit, never from the 10,000 service maximum.
+2. Batch items per child to amortize child start, Lambda invoke, Init, and client setup. Stop when payload, timeout, failure isolation, or latency becomes worse.
+3. Prefer Express children for short idempotent work when its higher dispatch rate is useful and Lambda/downstream capacity can absorb it.
+4. Use native service integrations inside the child so fan-out does not create pass-through Lambda allocation.
+5. Write large results to S3 with `ResultWriter` instead of returning one aggregated state payload.
+6. Make child work idempotent. Retrying the Map state creates another Map Run and can replay successful work; use targeted redrive when possible.
 
-Example: $M=700$, $D_c=2$ s, and $B=20$. Express-child dispatch allows $20\times\min(1000,350)=7{,}000$ items/s. Standard-child dispatch limits the same design to $20\times\min(100,350)=2{,}000$ items/s.
+Use Distributed mode when Inline Map's 40 concurrent iterations, parent payload, or parent history is the constraint—not merely because 10,000 concurrency exists.
 
-### Optimization controls
-
-- `ItemBatcher` amortizes child-start and fixed task overhead. Batch size is ultimately constrained by the **256 KiB** child input/output limit and downstream service payload limits.
-- Set maximum concurrency from downstream capacity rather than the 10,000 service maximum.
-- `ResultWriter` exports child results to S3 and avoids assembling one large result array in workflow state.
-- Failure thresholds accept a count, a percentage from **0 to 100**, or both; exceeding either threshold fails the Map Run. Children may continue briefly while failure is recognized.
-- Retrying the Distributed Map state applies to all child workflows and creates a new Map Run, not only the failed child. This can multiply work sharply; make children idempotent and prefer targeted redrive when appropriate.
+Sources: [Distributed Map](https://docs.aws.amazon.com/step-functions/latest/dg/state-map-distributed.html), [Map workflow state](https://docs.aws.amazon.com/step-functions/latest/dg/state-map.html), and [Distributed Map quotas](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html).

@@ -1,58 +1,42 @@
-A standard [[Lambda]] execution environment handles **one invocation at a time**. Scaling adds isolated execution environments; optimization means matching request rate, duration, concurrency, and downstream capacity.
+A standard [[Lambda]] execution environment runs one invocation at a time. Lambda scales a function by assigning idle environments or allocating more environments; it does not add concurrent requests to one environment.
 
-### Capacity model
+### Allocation dynamics
 
-Let $R$ be requests/s, $D$ mean duration in seconds, and $C$ usable concurrency. Little's Law gives the required steady-state concurrency:
+For arrival rate $R$ requests/s and mean occupied duration $D$ seconds, steady compute demand is
 
 $$C_{\text{required}}=RD.$$
 
-For synchronous invocation, Lambda also applies a request-rate limit of $10C$, so
+Occupied duration includes handler work and extensions that have not reported completion. Cold Init adds latency to the request that caused allocation but does not change the one-invocation-per-environment rule.
 
-$$R_{\lambda}\le\min\left(\frac{C}{D},10C\right).$$
+For each request:
 
-The crossover is $D=100$ ms. Below 100 ms, the request-rate quota can bind before concurrency; above 100 ms, duration usually makes concurrency the tighter limit. Asynchronous invocation is concurrency-limited but is not subject to the synchronous $10C$ request-rate rule.
+1. Idle inventory exists: reserve one environment and invoke immediately on the warm path.
+2. No idle inventory, concurrency available: allocate and initialize one environment on the cold path.
+3. Concurrency unavailable: synchronous requests throttle; asynchronous requests remain queued; poll-based sources retain backlog and reduce or stop new invokes.
 
-| mean duration | concurrency needed at 10,000 requests/s | throughput with $C=1{,}000$ |
-|---:|---:|---:|
-| 20 ms | 200 | 10,000/s, request-rate limited |
-| 100 ms | 1,000 | 10,000/s, both limits equal |
-| 250 ms | 2,500 | 4,000/s, concurrency limited |
-| 1 s | 10,000 | 1,000/s, concurrency limited |
+New on-demand inventory can grow by at most 1,000 environments per function per 10 seconds. A burst therefore starts with warm plus provisioned inventory, then adds at most this allocation wave while account and reserved concurrency remain available.
 
-### Public resource limits
+Synchronous invocation also has a request-rate ceiling of 10 × concurrency. Below 100 ms mean duration, that request-rate ceiling can bind before environment concurrency; above 100 ms, $RD$ usually binds first.
 
-| resource | default or hard limit |
-|---|---:|
-| account concurrency | 1,000 per Region; adjustable |
-| concurrency left for unreserved functions | at least 100 |
-| per-function scale-up | 1,000 environments per 10 s, or 10,000 additional requests/s per 10 s |
-| memory | 128–10,240 MB in 1-MB increments |
-| CPU allocation | proportional to memory; about 1 vCPU at 1,769 MB |
-| function timeout | 900 s |
-| ephemeral `/tmp` | 512–10,240 MB |
-| synchronous request/response payload | 6 MB each |
-| asynchronous invocation payload | 1 MB |
-| streamed synchronous response | 200 MB; after the first 6 MB, 2 MB/s |
-| file descriptors; processes/threads | 1,024 each per environment |
+### Controls with different jobs
 
-The per-function scaling allowance refills continuously and does not accumulate beyond 1,000 environments. Traffic above the available scale rate or concurrency receives throttling responses.
+- Reserved concurrency reserves capacity for the function and is also a hard maximum. Set it from the narrowest downstream connection, transaction, or rate limit.
+- Provisioned concurrency is a pre-initialized warm baseline for a version or alias. It reduces cold-path latency but does not protect a downstream system and is not a maximum.
+- Source maximum concurrency bounds a specific event source before it consumes all function concurrency.
+- Step Functions Map maximum concurrency bounds orchestration fan-out; it does not reserve Lambda environments.
 
-### Concurrency controls
+Traffic above provisioned concurrency can use on-demand environments until reserved or account concurrency binds. Sharp predictable bursts need scheduled provisioned capacity; reactive target tracking observes demand only after it begins.
 
-- **Reserved concurrency** dedicates capacity and simultaneously caps the function. It costs nothing and is the correct control when a database, API, or connection pool has a hard concurrency ceiling.
-- **Provisioned concurrency** pre-initializes a version or alias; it cannot target `$LATEST`. It may not exceed the function's reserved concurrency when both are configured.
-- With the default 1,000 account quota and no other reservations, one function can receive at most **900** provisioned units because 100 remain available to unreserved functions.
-- A provisioned alias/version can accept up to **10 × provisioned concurrency** synchronous requests/s. Excess traffic can spill into on-demand capacity if unreserved concurrency remains.
-- AWS recommends sizing provisioned concurrency around observed peak concurrency plus roughly **10%**. A peak of 200 therefore suggests about 220 provisioned environments.
-- Application Auto Scaling target tracking accepts utilization targets from **10% to 90%**. It needs three breaching data points and burst load sustained for at least about **3 minutes**, so scheduled scaling or a higher baseline is safer for short predictable bursts.
+### Highest-leverage optimization
 
-### Optimization levers
+1. Reduce occupied duration $D$: remove blocking, batch network calls, reuse clients and sockets, and move waiting into Step Functions Wait or callback states.
+2. Tune memory with measurement. CPU allocation increases with memory and is approximately one vCPU at 1,769 MB; a faster function releases its environment sooner and needs less concurrency.
+3. Reduce allocation churn: avoid needless version/alias fragmentation, deploy before the peak, and smooth fan-out so completed environments can be reused.
+4. Bound concurrency at the producer to the downstream limit. Unbounded fan-out converts queueing into throttles, cold starts, retries, and connection storms.
+5. Use provisioned concurrency only when p95/p99 latency shows Init is material. It does not improve a slow warm handler.
 
-- Increasing memory also increases CPU. For CPU-bound work, a higher memory setting can reduce $D$ enough to lower both required concurrency and total cost; measure rather than minimizing memory.
-- Initialize reusable clients, connections, and static assets outside the handler and reuse `/tmp`; this reduces warm-invocation duration. Keep-alive is required because Lambda eventually purges idle connections.
-- Load-test the complete path. Lambda can scale faster than a database, API, ENI pool, or Step Functions quota, so reserved concurrency should encode the smallest downstream limit.
-- Monitor duration, concurrency, throttles, provisioned-concurrency spillover, and maximum memory used. Optimize the observed bottleneck rather than one resource in isolation.
+Measure `ConcurrentExecutions`, `Throttles`, `Duration`, `Init Duration`, `PostRuntimeExtensionsDuration`, and `ProvisionedConcurrencySpilloverInvocations`. Separate warm, cold, and retry samples before choosing a lever.
 
-See [[(Lambda) Placement]] for cold-path ramp and [[Serverless Throughput Envelope]] for combined Step Functions/Lambda sizing.
+See [[(Lambda) Placement]], [[(Lambda)(SLMS) Sandbox Lifecycle Management Service]], and [[Serverless Throughput Envelope]].
 
-Sources: [Lambda quotas](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html), [Lambda scaling behavior](https://docs.aws.amazon.com/lambda/latest/dg/scaling-behavior.html), [Lambda concurrency](https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html), and [provisioned concurrency](https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html).
+Sources: [Lambda scaling behavior](https://docs.aws.amazon.com/lambda/latest/dg/scaling-behavior.html), [Lambda concurrency](https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html), [Lambda metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html), and [provisioned concurrency](https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html).
