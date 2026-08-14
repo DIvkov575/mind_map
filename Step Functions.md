@@ -1,12 +1,20 @@
-A serverless workflow orchestrator that executes state machines defined in Amazon States Language (ASL). It coordinates work across AWS services; a Lambda `Task` invokes [[Lambda]], but Step Functions does not reserve Lambda execution environments or bypass Lambda concurrency limits.
+A serverless workflow orchestrator that executes state machines defined in Amazon States Language. It coordinates work across AWS services; a Lambda Task invokes [[Lambda]], but Step Functions neither reserves Lambda execution environments nor bypasses Lambda quotas.
 
-Two workflow types:
+### Quantitative workflow selection
 
-- [[Step Functions Standard Workflow]] — durable, auditable execution for up to one year with exactly-once workflow execution unless explicit `Retry` behavior applies.
-- [[Step Functions Express Workflows]] — high-volume execution for up to five minutes; asynchronous executions are at-least-once and synchronous executions are at-most-once.
+| property | [[Step Functions Standard Workflow|Standard]] | [[Step Functions Express Workflows|Express]] |
+|---|---:|---:|
+| maximum duration | 1 year | 5 minutes |
+| execution semantics | exactly-once unless retried | async at-least-once; sync at-most-once |
+| built-in execution history | 25,000 events; 90-day retention | none; use CloudWatch Logs |
+| default start refill | 300/s in major Regions; 150/s elsewhere | 6,000/s for asynchronous starts |
+| state-transition refill | 5,000/s in major Regions; 800/s elsewhere | unlimited by the Standard transition bucket |
+| billing dimension | state transitions | executions, duration, memory |
 
-[[Step Functions Distributed Map]] is a Standard-only `Map` processing mode for large datasets and high parallelism, not a third workflow type.
+Use Standard for long-running, non-idempotent, callback, job-run, Activity, and [[Step Functions Distributed Map|Distributed Map]] workflows. Use Express when execution is under 5 minutes, steps are idempotent, and the design needs high event rate rather than durable service-managed history. A Standard parent can nest an Express child for a short, high-transition subworkflow.
 
-Shared quantitative constraints live in [[Step Functions Quotas]]. End-to-end Lambda-task sizing is in [[Serverless Throughput Envelope]].
+Every task, state, and execution input/output is limited to **256 KiB**. State-machine definitions and API requests are limited to **1 MB**. Store larger data in S3 and pass references rather than carrying it through state.
 
-Source: [Choosing a workflow type in Step Functions](https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html).
+Shared allocation limits live in [[Step Functions Quotas]]. End-to-end Lambda-task sizing is in [[Serverless Throughput Envelope]].
+
+Sources: [Choosing a workflow type](https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html), [Step Functions quotas](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html), and [Step Functions best practices](https://docs.aws.amazon.com/step-functions/latest/dg/sfn-best-practices.html).
