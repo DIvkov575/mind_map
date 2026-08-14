@@ -1,6 +1,14 @@
-A serverless workflow scheduler. [[Step Functions]] stores or advances orchestration state; it does not reserve [[Lambda]] execution environments.
+[[Step Functions]] coordinates service calls, decisions, and waits. It stores workflow state; it does not reserve [[Lambda]] execution environments.
 
-### Lambda allocation boundary
+### Choose an objective
+
+- Durable execution, long waits, jobs, or callbacks → [[Step Functions Standard Workflow|Standard Workflow]]
+- Short, high-rate, idempotent execution → [[Step Functions Express Workflows|Express Workflows]]
+- Large parallel fan-out → [[Step Functions Distributed Map|Distributed Map]]
+- Diagnose dispatch or payload limits → [[Step Functions Quotas]]
+- Size Lambda capacity for a workflow → [[Serverless Capacity Planning]]
+
+### Lambda boundary
 
 1. A Lambda Task state becomes runnable.
 2. Step Functions sends an invoke request to Lambda.
@@ -9,7 +17,7 @@ A serverless workflow scheduler. [[Step Functions]] stores or advances orchestra
 
 Wait states, choice logic, and callback waiting consume Step Functions execution capacity but no Lambda compute. A callback Lambda should start external work, return immediately, and let Step Functions hold the task token.
 
-### Performance hot paths
+### Execution choices
 
 - Native service integration: transition → target service. Prefer this when Lambda would only translate a request, poll status, sleep, or relay a result.
 - Lambda Task: transition → Lambda routing/allocation/Init if cold → handler and downstream I/O → response → next transition. Every Lambda hop adds latency, concurrency demand, and another retry boundary.
@@ -24,7 +32,3 @@ Wait states, choice logic, and callback waiting consume Step Functions execution
 3. Pass S3 references instead of large state payloads; every state/task input and output is capped at 256 KiB and is serialized across transitions.
 4. Bound Map and child-workflow concurrency by Lambda reserved concurrency and the narrowest downstream resource.
 5. Make retried tasks idempotent and count retry attempts in allocation demand.
-
-See [[Serverless Throughput Envelope]] and [[Step Functions Quotas]].
-
-Sources: [Choosing a workflow type](https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html), [service integration patterns](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html), and [Step Functions best practices](https://docs.aws.amazon.com/step-functions/latest/dg/sfn-best-practices.html).

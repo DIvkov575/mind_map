@@ -1,4 +1,4 @@
-A standard [[Lambda]] execution environment runs one invocation at a time. Lambda scales a function by assigning idle environments or allocating more environments; it does not add concurrent requests to one environment.
+Use this note to estimate [[Lambda]] environment demand, choose concurrency controls, and diagnose throttling. One standard environment runs one invocation at a time.
 
 ### Allocation dynamics
 
@@ -37,6 +37,4 @@ Traffic above provisioned concurrency can use on-demand environments until reser
 
 Measure `ConcurrentExecutions`, `Throttles`, `Duration`, `Init Duration`, `PostRuntimeExtensionsDuration`, and `ProvisionedConcurrencySpilloverInvocations`. Separate warm, cold, and retry samples before choosing a lever.
 
-See [[(Lambda) Placement]], [[(Lambda)(SLMS) Sandbox Lifecycle Management Service]], and [[Serverless Throughput Envelope]].
-
-Sources: [Lambda scaling behavior](https://docs.aws.amazon.com/lambda/latest/dg/scaling-behavior.html), [Lambda concurrency](https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html), [Lambda metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html), and [provisioned concurrency](https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html).
+See [[Lambda Environment Creation]], [[Lambda Environment Lifecycle]], and [[Serverless Capacity Planning]].

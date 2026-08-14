@@ -19,6 +19,4 @@ Token depth absorbs a brief burst; refill is sustainable rate. When Step Functio
 4. Bound Map concurrency so orchestration cannot emit work faster than Lambda and the downstream system can consume it.
 5. Pass references instead of large payloads to reduce serialization even below the 256-KiB hard limit.
 
-Control-plane polling quotas are omitted here because they do not determine task dispatch. See [[Serverless Throughput Envelope]] for the Lambda boundary.
-
-Source: [Step Functions service quotas](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html).
+Control-plane polling limits are omitted because they do not determine task dispatch. See [[Serverless Capacity Planning]] for the Lambda boundary.

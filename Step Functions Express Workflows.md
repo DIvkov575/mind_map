@@ -22,5 +22,3 @@ Use Express for a short idempotent chain where Standard's durable transition/his
 6. Enable only the CloudWatch Logs detail needed for diagnosis; Express has no built-in execution history and high-volume payload logging adds serialization and ingestion overhead.
 
 A Standard parent can start an Express child for a short idempotent segment while keeping callbacks, long waits, and durable boundaries in Standard.
-
-Sources: [Express workflows](https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html), [Express execution semantics](https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html#concepts-express-synchronous), and [Step Functions logging](https://docs.aws.amazon.com/step-functions/latest/dg/cw-logs.html).

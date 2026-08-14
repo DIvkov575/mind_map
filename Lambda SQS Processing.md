@@ -1,4 +1,4 @@
-How an Amazon SQS event-source mapping turns queue backlog into [[Lambda]] environment demand.
+How Amazon SQS backlog becomes [[Lambda]] environment demand, and which controls bound that demand.
 
 ### Invocation and allocation path
 
@@ -11,7 +11,7 @@ Standard polling starts at 5 concurrent batches and adds up to 300 concurrent in
 
 FIFO allocation is capped by the number of active message groups: only one batch per message group can be processed concurrently while preserving order.
 
-### Hot paths and controls
+### Controls
 
 - Batch size: larger batches amortize polling, invocation, cold Init, and client setup across more records. They also increase handler duration, payload size, and the amount of work exposed to one timeout.
 - Batching window: improves efficiency at low arrival rates by waiting for more records, but adds queue latency; low traffic can wait about 20 seconds even with a shorter configured window.
@@ -28,5 +28,3 @@ Provisioned polling is useful only when poller ramp or payload throughput is mea
 3. Use partial batch responses and idempotent per-record processing before increasing concurrency.
 4. Cap concurrency at downstream capacity; then size reserved concurrency so other event sources cannot starve the mapping.
 5. Use provisioned concurrency for cold-start latency and provisioned polling for poller throughput. They solve different allocation stages.
-
-Sources: [SQS event-source scaling](https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html), [using Lambda with SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html), and [SQS event-source configuration](https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-configure.html).

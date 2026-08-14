@@ -25,5 +25,3 @@ capped by configured child concurrency when only one Lambda task is active per c
 6. Make child work idempotent. Retrying the Map state creates another Map Run and can replay successful work; use targeted redrive when possible.
 
 Use Distributed mode when Inline Map's 40 concurrent iterations, parent payload, or parent history is the constraint—not merely because 10,000 concurrency exists.
-
-Sources: [Distributed Map](https://docs.aws.amazon.com/step-functions/latest/dg/state-map-distributed.html), [Map workflow state](https://docs.aws.amazon.com/step-functions/latest/dg/state-map.html), and [Distributed Map quotas](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html).

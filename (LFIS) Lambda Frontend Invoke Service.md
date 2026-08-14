@@ -1,3 +1,0 @@
-The [[Lambda]] invoke front door. It receives an admitted invoke, uses the request's function identity and routing metadata to find the assignment partition, forwards the payload, and returns or records the result according to the invocation mode.
-
-LFIS routes; it does not choose a worker, initialize code, or keep an environment warm. Environment selection begins in [[(eLSA) Lambda Sandbox Assignment]]. There is no customer tuning knob for this hop: remove unnecessary Lambda invocations and keep payloads small enough that routing and serialization do not dominate short handlers.
