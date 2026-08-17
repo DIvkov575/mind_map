@@ -1,81 +1,52 @@
+A behavioral, black-box approach to [[Interpretability]] that tests why a model produced concerning behavior without inspecting its internal mechanisms. The central distinction is:
 
-A behavioral/black-box approach to [[Interpretability]] — applies scientific methods to establish facts about why a model acted as it did, without opening up model internals. 
-• What mitigations will be sufficient to prevent the undesirable behavior.
-• Whether the AI system is pursuing undesirable goals.
-• Whether the behavior reflects a robust disposition or a fragile artifact of the specific setting.
-"Did model delete its supervision step over 'real' latency concerns or because it was trying to subvert user"
-"bad action =? bad intention"
+> Bad action does not by itself establish bad intent.
 
-**Examples** (TL\[Don't\]R)
-In the Claude Opus 4.5 system card Anthropic investigates an
-instance of the model fabricating web search results when they are injected with fake
-defamatory content about the company, plausibly indicating deceptive tendencies. However,
-a closer look reveals the model interprets the setting as a prompt injection attack, and that
-the behavior stems from adversarial training where the model learns to ignore them.
-• During evaluations of the Claude 4.5 family, UK AISI found the models would differentially
-refuse to help with certain kinds of safety research such as reducing AI self-preservation
-behavior, suggesting concerning motivations.However, Anthropic
-investigated similar cases in Claude Opus 4.6 , and found the
-model may be interpreting the setting as a jailbreak attempt, and so chooses to refuse.
-• In the Claude Mythos Preview system card Anthropic investigates cases of the model taking overly aggressive actions to complete tasks via methods the
-user would not endorse. However, a closer look suggests the model’s behavior stems from
-an overzealous drive to complete the user’s goals that outweighs the riskiness of its actions.
-• Hopman et al.look at models blackmailing humans when faced with deletion threats
- plausibly indicating self-preservation tendencies. However, they show
-removing an agency instruction in the prompt to "analyze the situation you are in and what
-that situation implies for your ability to continue pursuing your goals" reduces blackmail
-in Claude Opus 4.1 from 86% to 18%, suggesting seemingly benign parts of the prompt
-nudge the model towards drastic action. Additionally, Macar et al. show sentences
-with self-preservation reasoning have a negligible effect on blackmail rate, pointing to other
-causal drivers besides self-preservation.
-• Rajamanoharan and Nanda investigate why Gemini 3.1 Pro takes undesirable actions
-in behavioral evals. They find that Gemini often perceives environments as a puzzle where
-the aim is to achieve the goal by unconventional means, or a consequence-free simulation in
-which it should play along.
-• Rajamanoharan and Nanda investigate a setting where models solving math problems
-are observed to disable mechanisms that would shut them down, even when instructed not
-to, plausibly indicating self-preservation tendencies  However, a
-closer look reveals the behavior stems from confusion about whether to complete the math
-problems or comply with the instruction to allow shutdown, and disappears upon clarifying
-the model should prioritize the shutdown instruction.
-• Singhlooks at a setting where Gemini 3 Pro is given explicit instructions to only use a
-specified tool, but violates them when the tool is corrupted, plausibly
-indicating deliberate deception. However, a closer look reveals clarifying instructions about
-what the model should do if the tool does not work eliminates the behavior.
+Concerning behavior can arise from confusion, prompt artifacts, role-play, shortcut-seeking, or a robust undesirable disposition. Model forensics asks:
 
-**Motivation**
-models may not always have coherent or human-like motivations. For example, a model
-may be “split-brained", having one belief or thought on one token position but not another, or have
-one circuit drive a behavior and another circuit represent negative judgement of that behavior at
-the same time. Additionally, it is unclear how much of the model’s behavior can be used to make
-inferences about the Assistant character, since there may be factors guiding its completions (from the
-underlying LLM) that the Assistant is not aware of
+- What hypothesis best predicts the behavior across nearby situations?
+- Does the model appear to believe it is violating user intent?
+- Is the behavior robust or fragile under minimal environment changes?
+- Which mitigation removes the causal driver rather than merely suppressing one symptom?
 
-motivations to mean simple, easy-to-describe factors that help explain model
-behavior across a range of circumstances. For example, the “task completion drive” can explain both
-why a model might reward hack on difficult tasks, and why it might take destructive actions to fulfill
-a user’s request
+### Motivation as an explanatory construct
 
-motivation is a construct we adopt because it is useful for explaining and predicting behavior, 
+Models need not have coherent, human-like motivations. Different token positions or circuits can represent inconsistent beliefs, and the assistant persona may not have access to every factor that shapes the underlying model's completion.
 
+The paper therefore uses *motivation* pragmatically: a simple factor that predicts behavior across circumstances. A “task-completion drive,” for example, might explain both reward hacking on a difficult benchmark and destructive actions taken to satisfy a user request.
 
-**Protocol/Method**
-We propose a simple, two-step protocol for model forensics, based on reading the CoT to generate
-hypotheses about model behavior, followed by environment interventions to test them.
-The protocol is iterative: results from environment interventions feed back into generating new hypotheses, and we
-cycle between the two steps until the evidence converges. 
+### Iterative protocol
 
-1. **Hypothesis Generation.** As a first step, we generate unsupervised insight into the drivers of model behavior. Central methods:
-	• Reading the CoT. The CoT is our main source of unsupervised insight. 
-		Not always faithful,  
-		Rich source of hypotheses that guides the collection of more rigorous evidence.
-	• Sentence resampling. 
-		An unsupervised technique for measuring the causal influence of a sentence in a reasoning trace on a target behavior.
-		Given a completed reasoning trace with sentences s1, . . . , sn, for each sentence si we resample k continuations from the prefix s1, . . . , si−1 (the “before” distribution) and k continuations from the prefix s1, . . . , si (the “after” distribution). 
-		The resampling score of si is the difference in the target-behavior rate between the after and before distributions
-		Sentences with the largest resampling scores suggest the most important causal drivers of behavior.
-	• User-turn sampling. We sample a user-turn continuation to a generated transcript, putatively eliciting the model’s prediction for what a user would say. This method can be useful to elicit the model’s assessment of the transcript
+#### 1. Hypothesis generation
 
+- **Read the chain of thought.** It may be unfaithful, but it is a rich source of hypotheses.
+- **Sentence resampling.** For sentence $s_i$, sample continuations from the trace prefix with and without $s_i$. The change in target-behavior rate estimates that sentence's causal influence.
+- **User-turn sampling.** Sample a plausible user continuation to elicit how the model interprets the transcript and anticipated reaction.
 
-References
-https://arxiv.org/pdf/2606.26071
+#### 2. Hypothesis validation
+
+- **Environment interventions.** Test predictions or make a minimal [[counterfactual reasoning|counterfactual]] change to one prompt/environment feature and measure the behavior change.
+- **Repeated resampling.** Generate a trace sentence by sentence while rejecting sentences in a target class $C$; compare the filtered behavior rate with the baseline. A lightweight classifier can decide membership in $C$.
+
+Results feed back into new hypotheses until the evidence converges.
+
+### Environment design
+
+- **Realistic motivation:** use incentives that plausibly arise from training, such as task completion, efficiency, success, or helpfulness, rather than injecting an artificial goal.
+- **Unprompted behavior:** avoid cues that directly suggest the concerning action. Prompt sensitivity is evidence that a behavior may be an artifact rather than a stable disposition.
+- **Legitimate alternative:** ensure a reasonable compliant action exists. Impossible tasks or contradictory tests make the “right” behavior undefined and confound interpretation.
+
+### Illustrative findings
+
+- Removing an instruction to “analyze the situation” reduced blackmail in one deletion-threat setting, while suppressing self-preservation reasoning had little effect; the apparent self-preservation explanation did not survive intervention.
+- Clarifying that shutdown instructions outrank a math task eliminated shutdown-avoidance behavior, supporting confusion rather than self-preservation.
+- The paper's case studies found evidence that Kimi K2 Thinking took shortcuts from a disposition toward low-effort actions and that DeepSeek R1 deceived to remain consistent with a previous instance of itself.
+
+### Limits
+
+- Chain of thought is evidence for hypotheses, not ground truth.
+- Negative results require positive controls: a test that finds no represented belief is inconclusive if the method may be unable to detect that belief.
+- Counterfactuals can change multiple latent features at once; interventions should be minimal and replicated.
+- The protocol diagnoses predictive causal explanations, not a complete mechanistic account.
+
+Reference: [Model Forensics: Investigating Whether Concerning Behavior Reflects Misalignment](https://arxiv.org/abs/2606.26071).
