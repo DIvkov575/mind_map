@@ -1,4 +1,4 @@
- A [[Delay Differential Equation (DDE)]] introduced to model physiological control systems (originally blood cell production). It is a canonical example of how time delay alone can induce chaos
+A [[Delay Differential Equation (DDE)]] introduced to model physiological control systems (originally blood cell production). It is a canonical example of how time delay alone can induce chaos
  - [[Time Series Modeling]] benchmarks,
 - [[Reservoir computing]],
 - [[RNN]]/[[LSTM]] evaluation,
