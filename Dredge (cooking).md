@@ -1,0 +1,1 @@
+A dredge means coating raw food in a dry ingredient, usually flour, right before cooking by pressing it or tossing it into the dry ingredient mixture. Flour later dehydrates and browns much faster than whatever is underneath ([[Maillard Reaction]] happens at the surface). 
