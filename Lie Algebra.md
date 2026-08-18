@@ -1,47 +1,67 @@
-[[Algebra]]
-F-vector space L together with bilinear map [-,-] the Lie bracket
-$$L\times L \to L, \quad (x,y)\mapsto xy$$ satisfying
-$[x,x]=0$ and [[Jacobi Identity]]
-The lie bracket is often referred to as the "commutator"
-antisymmetry $[x,y] = -[y,x]$ is implied
+A Lie algebra over a field $F$ is a vector space $\mathfrak g$ equipped with a bilinear operation
+$$
+[-,-]:\mathfrak g\times\mathfrak g\to\mathfrak g
+$$
+such that
+$$
+[X,Y]=-[Y,X]
+$$
+and the [[Jacobi Identity]] holds:
+$$
+[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0.
+$$
+The operation is the [[Lie Bracket]].
 
+**Intuition**
 
+A Lie algebra is the infinitesimal form of a [[Lie Groups|Lie group]]. Its vectors are generators of continuous transformations, and its bracket records the leading-order effect of changing the order of two transformations.
 
-### Intuition
+- matrix Lie algebras use $[X,Y]=XY-YX$
+- vector fields use $[X,Y](f)=X(Yf)-Y(Xf)$
+- an abelian Lie algebra has $[X,Y]=0$ for every pair
 
+**Subalgebras, ideals, and quotients**
 
+A [[Subalgebra]] is a vector subspace closed under bracketing with itself. An [[Ideal (Lie Algebra)|ideal]] $I$ satisfies the stronger condition
+$$
+[\mathfrak g,I]\subseteq I.
+$$
+This stability is what makes the [[Quotient (Factor) Algebra]] $\mathfrak g/I$ well-defined.
 
-### Properties
-**Ideal**
-Idea of Lie algebra $L$ is a subspace $I$ such that $$[x,y]\in I \quad\forall x\in L~y \in I$$Assume $I, J \in L$ and that $I,J$ are ideals
-- $I \cap J$ and $I + J$ are both ideals
+The center
+$$
+Z(\mathfrak g)
+=\{X\in\mathfrak g:[X,Y]=0\ \text{for every }Y\in\mathfrak g\}
+$$
+is always an ideal.
 
+**Adjoint representation**
 
-**Center $Z(L)$ definition**
-A center is a type of idea such that
-$$Z(L) = \{ x \in L ~|~ [x,y]=0 \quad\forall y\in L \}$$
+Each $X\in\mathfrak g$ defines a linear map
+$$
+\operatorname{ad}_X(Y)=[X,Y].
+$$
+The Jacobi identity is equivalent to
+$$
+[\operatorname{ad}_X,\operatorname{ad}_Y]
+=\operatorname{ad}_{[X,Y]},
+$$
+so $\operatorname{ad}:\mathfrak g\to\mathfrak{gl}(\mathfrak g)$ is a Lie-algebra representation. Its kernel is $Z(\mathfrak g)$.
 
-Since $Z(L)$ is an ideal, $L/Z(L)$ is always a well-defined [[Quotient (Factor) Algebra]].
+**Structure constants**
 
-**Adjoint Homomorphism**
-if $L$ is a lie algebra, we define 
-$ad: L \to gl(L)$ by $(ad~x)(y) \coloneqq [x,y]$
-- Linearity of $ad~x$ follow from [[Bilinear Form|bi-linearity]] of Lie brackets; the inverse is linear for similar reasons
-- for homomorphism, we must check: $$ad([x,y]) = ad~x \circ ad~y - ad~y \circ ad~x \quad(\forall x,y)$$
+Given a basis $(X_1,\ldots,X_n)$, the bracket is determined by coefficients $c_{ij}^{\,k}$:
+$$
+[X_i,X_j]=\sum_k c_{ij}^{\,k}X_k.
+$$
+Antisymmetry and Jacobi become algebraic constraints on these constants.
 
-this turns out to be equivalent to the [[Jacobi Identity]]
-the kernel of ad turns out to be the centre of L
-
-
-**Derivation**
-Let $A$ be an algebra over $F$. A derivation of $A$ is a $F$-linear map $D: A \to A$ such that $$D(a,b) = aD(b) + D(a)b\quad \forall a,b \in A$$
-let $Der A$ be the set of all derivations. The set is closed under vector addition and scalar multiplication and contains the zero map; hence it is a subspace of $gl(A)$. $Der A$ is a lie algebra (if D,E are derivation, then $[D, E]$ is too)
-
-**Structure Constants**
-If $L$ is a lie algebra over $F$ with basis $(x_1 \dots x_n$)$ then $[-,-]$ is completely determined by structure constants (with respect to basis) $a_{ij}^k \in F$ such that $$[x_i,x_j] = \sum_{k=1}^n a_{ijk} x_k$$
-Consider $SL_2$ = span({ 0100 0010 100-1}) 
-
-
-**Representation**
-[[Representation Theory]]
-A representation of the Lie algebra is a linear map $d\rho: \mathfrak{g} \to \mathfrak{gl}(V)$ that preserves the bracket: $d\rho([X,Y]) = d\rho(X)d\rho(Y) - d\rho(Y)d\rho(X)$. This is related to a group representation $\rho$ by $\rho(\exp(X)) = \exp(d\rho(X))$ — the algebra rep is the derivative of the group rep at the identity.
+More generally, a representation on a vector space $V$ is a linear map
+$$
+d\rho:\mathfrak g\to\mathfrak{gl}(V)
+$$
+that preserves brackets. When it comes from a group representation $\rho$, locally
+$$
+\rho(\exp X)=\exp(d\rho(X)).
+$$
+See [[Representation Theory]].

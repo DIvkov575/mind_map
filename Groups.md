@@ -1,50 +1,40 @@
-A set endowed with a "[[Group Actions]]" (an operation) which is (obviously Closed) and has
-- Identity
-- Associative
-- Inverse
-Relevant Proprs
+A group is a set $G$ with a binary operation $\cdot:G\times G\to G$ that is **closed** and satisfies three axioms:
 
-- maybe add some shit on acts on X...
+- **Associativity** — $(a\cdot b)\cdot c=a\cdot(b\cdot c)$ for all $a,b,c\in G$.
+- **Identity** — there is $e\in G$ with $e\cdot a=a\cdot e=a$ for all $a$.
+- **Inverses** — every $a\in G$ has some $a^{-1}\in G$ with $a\cdot a^{-1}=a^{-1}\cdot a=e$.
 
-- Symmetries because the whole point is that hte object remains the same eg. a square a square
-- Symmetries becuase they can be composed and undone
+The identity and each inverse are unique. If the operation also commutes ($a\cdot b=b\cdot a$) the group is **abelian**.
 
-### Applications/Properties
-- [[Legrange Theorem]]
-- [[Representation Theory]]
-- [[Center (Group Theory)]] — the (always normal) subgroup of elements commuting with everything; measures how far $G$ is from abelian
-### Main Classes
-**Permutation Group**
- Given any set X and a collection G of [[Bijection]]s of X into itself (known as permutations) that is closed under compositions and inverses, G is a group acting on X.
- ~ take any $g_1, g_2 \in G$ then their composition still a permute
- ~ if X consists of n elements and G consists of all permutations, G is the [[Symmetric Group (S_n)]]
- ~ Every finite group embeds in some $S_n$ ([[Cayley Theorem]])
+**Intuition: symmetry**
 
-**Matrix / Linear Groups**
-Elements are invertible matrices over a field (or ring), operation is matrix multiplication.
-- [[Linear Group GL(n)]] all invertible $n\times n$ matrices.
-- $SL_n(F)$ — determinant 1.
-- $O(n)$ / $SO(n)$ — orthogonal (preserve a symmetric bilinear form / length); $SO(n)$ is the rotation subgroup. Concrete use case: [[Electron Arrangements|per-residue rotation frames]] in protein structure representation are elements of $SO(3)$.
-- $U(n)$ / $SU(n)$ — unitary (complex, preserve Hermitian form).
-- $Sp(2n)$ — symplectic (preserve an alternating form).
-- Every finite group also embeds in some $GL_n$ (via its regular representation), so this class is universal too.
+A group is the algebra of the symmetries of an object — the transformations that leave it looking the same. This is why the axioms are the ones they are: symmetries can be *composed* (associativity), *doing nothing* is a symmetry (identity), and any symmetry can be *undone* (inverses). Composition is generally order-dependent, which is precisely why non-abelian groups are the interesting ones. A group meets the object it is the symmetry of through a [[Group Actions|group action]] $G\times X\to X$; the [[Center (Group Theory)|center]] measures how far $G$ is from abelian.
 
-**Additive / arithmetic groups**
-Elements are numbers, operation is ordinary addition or multiplication.
-- $(\mathbb{Z}, +)$, $(\mathbb{Z}_n, +)$, $(\mathbb{R}, +)$, $(\mathbb{Q}, +)$.
-- $(\mathbb{R}^, \times)$, $(\mathbb{C}^, \times)$, $(\mathbb{Z}/n\mathbb{Z})^*$ — nonzero elements under multiplication.
+### Applications / properties
+- [[Legrange Theorem]] — a subgroup's order divides the group's order.
+- [[Representation Theory]] — realize abstract elements as concrete linear maps.
+- [[Center (Group Theory)]] — the (always normal) subgroup of elements commuting with everything.
+- [[Lie Groups]] — groups that are also [[Smooth Manifold|smooth manifolds]]; their infinitesimal structure is a [[Lie Algebra]].
 
-**Geometric / transformation groups**
-Elements are symmetries of a geometric object, operation is composition of transformations.
-- [[Dihedral Group (D_2n)]] symmetries of a regular $n$-gon.
-- [[Isometry Group]] rigid motions of a space (translations + rotations + reflections), e.g. $\mathrm{Isom}(\mathbb{R}^n)$.
-- [[Point Group]] / space groups — crystallographic symmetry groups (chemistry/physics).
+### Main classes
+
+**Permutation groups.** Given a set $X$ and a collection $G$ of [[Bijection]]s $X\to X$ closed under composition and inverse, $G$ is a group acting on $X$. If $X$ has $n$ elements and $G$ is *all* permutations, $G$ is the [[Symmetric Group (S_n)]]. Every finite group embeds in some $S_n$ ([[Cayley Theorem]]).
+
+**Matrix / linear groups.** Invertible matrices over a field under multiplication.
+- [[Linear Group GL(n)]] — all invertible $n\times n$ matrices; $SL_n(F)$ — determinant $1$.
+- $O(n)$ / $SO(n)$ — preserve a symmetric [[Bilinear Form]] (length); $SO(n)$ is the rotation subgroup, e.g. per-residue rotation frames in protein structure are elements of $SO(3)$. Infinitesimally these are [[(SO_n) Simple Orthogonal Lie Algebra|so(n)]].
+- $U(n)$ / $SU(n)$ — unitary (preserve a Hermitian form).
+- $Sp(2n)$ — symplectic (preserve an [[Alternating (form)|alternating]] form); infinitesimally [[(SP_n) Simple Symplectic Lie Algebra|sp(2n)]].
+- Every finite group also embeds in some $GL_n$ (regular representation), so this class is universal too.
+
+**Additive / arithmetic groups.** Numbers under addition or multiplication: $(\mathbb Z,+)$, $(\mathbb Z_n,+)$, $(\mathbb R,+)$, $(\mathbb Q,+)$; and $(\mathbb R^\times,\times)$, $(\mathbb C^\times,\times)$, $(\mathbb Z/n\mathbb Z)^\times$ under multiplication. See [[Additive group]], [[Cyclic Group]].
+
+**Geometric / transformation groups.** Symmetries of a geometric object under composition.
+- [[Dihedral Group (D_2n)]] — symmetries of a regular $n$-gon.
+- [[Isometry Group]] — rigid motions of a space, e.g. $\mathrm{Isom}(\mathbb R^n)$.
+- [[Point Group]] / space groups — crystallographic symmetry groups.
 - [[Braid groups B_n]] — braidings of $n$ strands.
 
-**Automorphism groups**
-Elements are structure-preserving self-maps of some object, operation is composition.
-- $\mathrm{Aut}(G)$ for a group $G$, $\mathrm{Aut}(\text{graph})$, Galois groups $\mathrm{Gal}(K/F)$ (automorphisms of a field extension fixing the base field).
+**Automorphism groups.** Structure-preserving self-maps under composition: $\mathrm{Aut}(G)$, $\mathrm{Aut}(\text{graph})$, Galois groups $\mathrm{Gal}(K/F)$.
 
-**Quotient / coset groups**
-Elements are equivalence classes ([[Coset]]s) rather than "concrete" objects directly.
-- $G/N$ for normal subgroup $N$ — e.g. $\mathbb{Z}/n\mathbb{Z}$ is technically in this class before you reinterpret it arithmetically.
+**Quotient / coset groups.** Elements are [[Coset]]s rather than concrete objects: $G/N$ for a normal subgroup $N$ — e.g. $\mathbb Z/n\mathbb Z$ sits here before being reinterpreted arithmetically.

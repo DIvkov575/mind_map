@@ -1,0 +1,1 @@
+A distogram is a two-dimensional matrix or histogram that estimates the Euclidean distances between pairs of [[Amino Acid]]  [[Residue]] in a [[Protein]]

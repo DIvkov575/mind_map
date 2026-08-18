@@ -1,4 +1,4 @@
-The [[Lie Algebra]] analogue of a quotient group or quotient vector space: given an [[Lie Algebra|ideal]] $I \subseteq L$,
+The [[Lie Algebra]] analogue of a quotient group or quotient vector space: given an [[Ideal (Lie Algebra)|ideal]] $I \subseteq L$,
 $$
 L/I = \{x + I : x \in L\}
 $$

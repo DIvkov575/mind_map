@@ -1,4 +1,5 @@
-A Riemannian manifold is a [[Smooth Manifold]] together with a Riemannian metric
+A Riemannian manifold is a [[Smooth Manifold]] together with a [[Riemannian metric]].
 
-Formally, a Riemannian metric on a [[Smooth]] manifold is a smoothly varying 
-choice of [[Inner Product]] for each [[Tangent space]] of the manifold. A Riemannian manifold is a smooth manifold together with a Riemannian metric
+The metric gives each [[Tangent Space]] a smoothly varying [[Inner Product]], allowing tangent-vector lengths and angles to be integrated into curve lengths and geodesic distances.
+
+A [[Statistical Manifold]] equipped with the [[Fisher Information|Fisher-Rao metric]] is the central object of [[Information Geometry]].
