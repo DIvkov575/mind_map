@@ -252,9 +252,57 @@
     window.addEventListener('mouseup', onUp);
     canvas.addEventListener('click', onClick);
     canvas.addEventListener('wheel', onWheel, { passive: false });
-    canvas.addEventListener('touchstart', onDown, { passive: true });
-    canvas.addEventListener('touchmove', (e) => { onMove(e); }, { passive: true });
-    canvas.addEventListener('touchend', onUp);
+    // Touch: 1 finger drags a node or pans; 2 fingers pinch-zoom + pan.
+    let pinch = null;
+    function touchXY(t) { const r = canvas.getBoundingClientRect(); return { sx: t.clientX - r.left, sy: t.clientY - r.top }; }
+    function pinchState(e) {
+      const a = touchXY(e.touches[0]), b = touchXY(e.touches[1]);
+      return { d: Math.hypot(a.sx - b.sx, a.sy - b.sy) || 1, cx: (a.sx + b.sx) / 2, cy: (a.sy + b.sy) / 2 };
+    }
+    function onTouchStart(e) {
+      if (e.touches.length >= 2) { dragging = null; panning = false; pinch = pinchState(e); moved = true; return; }
+      const { sx, sy } = touchXY(e.touches[0]);
+      const n = pickNode(sx, sy);
+      moved = false; pinch = null;
+      if (n) { dragging = n; alpha = Math.max(alpha, 0.6); } else { panning = true; }
+      lastX = sx; lastY = sy;
+    }
+    function onTouchMove(e) {
+      e.preventDefault();
+      if (e.touches.length >= 2 && pinch) {
+        const p = pinchState(e);
+        const before = screenToWorld(p.cx, p.cy);
+        view.k = Math.max(0.03, Math.min(6, view.k * (p.d / pinch.d)));
+        const after = screenToWorld(p.cx, p.cy);
+        view.tx += (after.x - before.x) * view.k + (p.cx - pinch.cx);
+        view.ty += (after.y - before.y) * view.k + (p.cy - pinch.cy);
+        pinch = p; moved = true;
+        return;
+      }
+      if (e.touches.length !== 1) return;
+      const { sx, sy } = touchXY(e.touches[0]);
+      if (dragging) {
+        const w = screenToWorld(sx, sy);
+        dragging.x = w.x; dragging.y = w.y; dragging.vx = 0; dragging.vy = 0; moved = true; alpha = Math.max(alpha, 0.4);
+      } else if (panning) {
+        view.tx += sx - lastX; view.ty += sy - lastY; lastX = sx; lastY = sy; moved = true;
+      }
+    }
+    function onTouchEnd(e) {
+      if (e.touches.length === 0) {
+        if (dragging && !moved) navigate(dragging);
+        dragging = null; panning = false; pinch = null;
+      } else if (e.touches.length === 1) {
+        pinch = null; dragging = null;
+        const { sx, sy } = touchXY(e.touches[0]);
+        lastX = sx; lastY = sy; panning = true;
+      }
+    }
+    canvas.style.touchAction = 'none';
+    canvas.addEventListener('touchstart', onTouchStart, { passive: true });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    canvas.addEventListener('touchend', onTouchEnd);
+    canvas.addEventListener('touchcancel', onTouchEnd);
     canvas.addEventListener('mouseleave', () => { if (tooltip) tooltip.hidden = true; hover = null; });
 
     const ro = new ResizeObserver(() => { resize(); });
