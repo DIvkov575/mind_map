@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { scanVault, resolveNote } from './lib/vault.mjs';
 import { createMarkdown, renderNote, toPlainText } from './lib/markdown.mjs';
 import { notePage, indexPage, graphPage } from './lib/templates.mjs';
+import { serviceWorkerSource } from './lib/sw-template.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT_ROOT = path.resolve(__dirname, '..');
@@ -19,6 +20,17 @@ async function rmrf(p) {
 async function copyFile(src, dest) {
   await fs.mkdir(path.dirname(dest), { recursive: true });
   await fs.copyFile(src, dest);
+}
+
+// Recursively list files under `dir`, returned as posix paths relative to it.
+async function walkFiles(dir, base = dir) {
+  const out = [];
+  for (const ent of await fs.readdir(dir, { withFileTypes: true })) {
+    const abs = path.join(dir, ent.name);
+    if (ent.isDirectory()) out.push(...await walkFiles(abs, base));
+    else out.push(path.relative(base, abs).split(path.sep).join('/'));
+  }
+  return out;
 }
 
 async function main() {
@@ -157,6 +169,16 @@ async function main() {
     path.join(OUT, 'unresolved.json'),
     JSON.stringify([...unresolvedSet].sort(), null, 2),
   );
+
+  // Service worker: precache the whole built tree so one online visit makes the
+  // entire vault readable offline. Exclude dev-only artifacts and the SW itself.
+  const exclude = new Set(['sw.js', 'unresolved.json', '.nojekyll']);
+  const precache = (await walkFiles(OUT))
+    .filter(u => !exclude.has(u) && !u.endsWith('/.DS_Store'))
+    .sort();
+  const version = new Date().toISOString();
+  await fs.writeFile(path.join(OUT, 'sw.js'), serviceWorkerSource({ version, urls: precache }));
+  console.log(`  service worker precaches ${precache.length} files (cache ${version})`);
 
   console.log(`  ${edges.length} edges, ${orphanCount} orphans`);
   console.log(`  ${unresolvedTotal} unresolved link occurrences (${unresolvedSet.size} distinct) -> dist/unresolved.json`);

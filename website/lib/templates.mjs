@@ -38,10 +38,12 @@ function header(p) {
 }
 
 function scripts(p, pageData) {
+  const home = p.home || './';
   return `<script>window.__SITE__ = ${JSON.stringify(pageData)};</script>
 <script src="${p.static}search.js" defer></script>
 <script src="${p.static}graph.js" defer></script>
-<script src="${p.static}app.js" defer></script>`;
+<script src="${p.static}app.js" defer></script>
+<script>if('serviceWorker' in navigator){addEventListener('load',function(){navigator.serviceWorker.register('${home}sw.js',{scope:'${home}'}).catch(function(){});});}</script>`;
 }
 
 // A note page: article + sidebar (local graph + backlinks + outgoing links).
