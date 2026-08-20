@@ -13,13 +13,17 @@ At $p_\theta$, write tangent vectors as $v=v^i\partial_i$ and $w=w^j\partial_j$,
 > $$
 > v=v^i\partial_i=\sum_i v^i\frac{\partial}{\partial\theta^i}.
 > $$
-> If $\theta(t)$ is a curve, then $v^i=d\theta^i/dt$, so $v$ is its instantaneous velocity. Acting on a function, $v[f]=v^i\partial_i f$ is the directional derivative. For $\theta=(\mu,\sigma)$, $v=a\partial_\mu+b\partial_\sigma$ means $d\mu/dt=a$ and $d\sigma/dt=b$. See [[Tangent Space]].
+> If $\theta(t)$ is a curve, then $v^i=d\theta^i/dt$, so $v$ is its instantaneous velocity. Acting on a function, $v[f]=v^i\partial_i f$ is the directional derivative **in the direction $v$ itself**: $v[f]=\tfrac{d}{dt}f(\theta(t))$, the rate of change of $f$ as you move along that curve. With $f=\log p_\theta$, $v\log p_\theta=\tfrac{d}{dt}\log p_{\theta(t)}$ is the rate of change of the log-density along $v$. For $\theta=(\mu,\sigma)$, $v=a\partial_\mu+b\partial_\sigma$ means $d\mu/dt=a$ and $d\sigma/dt=b$. See [[Tangent Space]].
 
 $$
 v\log p_\theta=v^i\partial_i\log p_\theta,
 \qquad
 w\log p_\theta=w^j\partial_j\log p_\theta.
 $$
+
+> [!note] Reading "score perturbation"
+> $\partial_i\log p_\theta$ is the **score**, the gradient of the log-likelihood whose covariance defines the Fisher information $I_{ij}$ below. Contracting it with a direction gives the directional score $v\log p_\theta=v^i\partial_i\log p_\theta$: the first-order change ("perturbation") in $\log p_\theta$ under an infinitesimal nudge of $\theta$ along $v$ (no permutation is involved). So $\langle v,w\rangle_\theta$ is the covariance of the two directional scores.
+
 The Fisher inner product is
 $$
 \langle v,w\rangle_\theta
